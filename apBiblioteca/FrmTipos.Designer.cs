@@ -52,19 +52,19 @@
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.stlbMensagem = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tpCadastro = new System.Windows.Forms.TabPage();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.txtCodigoTipo = new System.Windows.Forms.TextBox();
-			this.txtDescricaoTipo = new System.Windows.Forms.TextBox();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvTipos = new System.Windows.Forms.DataGridView();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.txtDescricaoTipo = new System.Windows.Forms.TextBox();
+			this.txtCodigoTipo = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.barraDeFerramentas.SuspendLayout();
 			this.ssMensagem.SuspendLayout();
 			this.tpCadastro.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).BeginInit();
 			this.tabControl1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// barraDeFerramentas
@@ -104,6 +104,7 @@
 			this.btnInicio.Text = "Início";
 			this.btnInicio.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnInicio.ToolTipText = "Vai para o início dos dados";
+			this.btnInicio.Click += new System.EventHandler(this.btnInicio_Click);
 			// 
 			// btnAnterior
 			// 
@@ -115,6 +116,7 @@
 			this.btnAnterior.Text = "Anterior";
 			this.btnAnterior.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnAnterior.ToolTipText = " Vai ao registro anterior";
+			this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
 			// 
 			// btnProximo
 			// 
@@ -126,6 +128,7 @@
 			this.btnProximo.Text = "Próximo";
 			this.btnProximo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnProximo.ToolTipText = "Avança para registro seguinte";
+			this.btnProximo.Click += new System.EventHandler(this.btnProximo_Click);
 			// 
 			// btnUltimo
 			// 
@@ -137,6 +140,7 @@
 			this.btnUltimo.Text = "Último";
 			this.btnUltimo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnUltimo.ToolTipText = "Posiciona no último registro";
+			this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -153,6 +157,7 @@
 			this.btnProcurar.Text = "Procurar";
 			this.btnProcurar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnProcurar.ToolTipText = "Procura registro através de seu código";
+			this.btnProcurar.Click += new System.EventHandler(this.btnProcurar_Click);
 			// 
 			// toolStripSeparator2
 			// 
@@ -169,6 +174,7 @@
 			this.btnNovo.Text = "Novo";
 			this.btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnNovo.ToolTipText = "Inclui novo registro em ordem de matrícula";
+			this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
 			// 
 			// btnEditar
 			// 
@@ -180,6 +186,7 @@
 			this.btnEditar.Text = "Editar";
 			this.btnEditar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnEditar.ToolTipText = "Permite alterar os dados do registro atual";
+			this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
 			// 
 			// btnCancelar
 			// 
@@ -191,6 +198,7 @@
 			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnCancelar.ToolTipText = "Cancela a operação atual";
+			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
 			// 
 			// btnSalvar
 			// 
@@ -203,6 +211,7 @@
 			this.btnSalvar.Text = "Salvar";
 			this.btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnSalvar.ToolTipText = "Armazena os valores atuais da tela";
+			this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
 			// 
 			// toolStripSeparator3
 			// 
@@ -219,6 +228,7 @@
 			this.btnExcluir.Text = "Excluir";
 			this.btnExcluir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnExcluir.ToolTipText = "Exclui o registro exibido na tela";
+			this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
 			// 
 			// toolStripSeparator4
 			// 
@@ -235,6 +245,7 @@
 			this.btnSair.Text = "Sair";
 			this.btnSair.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
 			this.btnSair.ToolTipText = "Termina o programa";
+			this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
 			// 
 			// dlgAbrir
 			// 
@@ -295,7 +306,7 @@
 			// tpCadastro
 			// 
 			this.tpCadastro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-			this.tpCadastro.Controls.Add(this.dataGridView1);
+			this.tpCadastro.Controls.Add(this.dgvTipos);
 			this.tpCadastro.Controls.Add(this.txtDescricaoTipo);
 			this.tpCadastro.Controls.Add(this.txtCodigoTipo);
 			this.tpCadastro.Controls.Add(this.label2);
@@ -307,66 +318,21 @@
 			this.tpCadastro.TabIndex = 0;
 			this.tpCadastro.Text = "Cadastro";
 			// 
-			// label1
+			// dgvTipos
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(38, 37);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(64, 18);
-			this.label1.TabIndex = 5;
-			this.label1.Text = "Código:";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(18, 69);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(84, 18);
-			this.label2.TabIndex = 6;
-			this.label2.Text = "Descrição:";
-			// 
-			// txtCodigoTipo
-			// 
-			this.txtCodigoTipo.Location = new System.Drawing.Point(106, 34);
-			this.txtCodigoTipo.MaxLength = 7;
-			this.txtCodigoTipo.Name = "txtCodigoTipo";
-			this.txtCodigoTipo.Size = new System.Drawing.Size(78, 26);
-			this.txtCodigoTipo.TabIndex = 7;
-			// 
-			// txtDescricaoTipo
-			// 
-			this.txtDescricaoTipo.Location = new System.Drawing.Point(106, 66);
-			this.txtDescricaoTipo.MaxLength = 30;
-			this.txtDescricaoTipo.Name = "txtDescricaoTipo";
-			this.txtDescricaoTipo.Size = new System.Drawing.Size(233, 26);
-			this.txtDescricaoTipo.TabIndex = 8;
-			// 
-			// tabControl1
-			// 
-			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tabControl1.Controls.Add(this.tpCadastro);
-			this.tabControl1.Location = new System.Drawing.Point(12, 41);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(586, 334);
-			this.tabControl1.TabIndex = 4;
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.dgvTipos.AllowUserToAddRows = false;
+			this.dgvTipos.AllowUserToDeleteRows = false;
+			this.dgvTipos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvTipos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-			this.dataGridView1.Location = new System.Drawing.Point(6, 113);
-			this.dataGridView1.MultiSelect = false;
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.Size = new System.Drawing.Size(566, 184);
-			this.dataGridView1.TabIndex = 9;
+			this.dgvTipos.Location = new System.Drawing.Point(6, 113);
+			this.dgvTipos.MultiSelect = false;
+			this.dgvTipos.Name = "dgvTipos";
+			this.dgvTipos.ReadOnly = true;
+			this.dgvTipos.Size = new System.Drawing.Size(566, 184);
+			this.dgvTipos.TabIndex = 9;
+			this.dgvTipos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTipos_CellClick);
 			// 
 			// Column1
 			// 
@@ -384,6 +350,52 @@
 			this.Column2.Name = "Column2";
 			this.Column2.ReadOnly = true;
 			// 
+			// txtDescricaoTipo
+			// 
+			this.txtDescricaoTipo.Location = new System.Drawing.Point(106, 66);
+			this.txtDescricaoTipo.MaxLength = 30;
+			this.txtDescricaoTipo.Name = "txtDescricaoTipo";
+			this.txtDescricaoTipo.Size = new System.Drawing.Size(233, 26);
+			this.txtDescricaoTipo.TabIndex = 8;
+			// 
+			// txtCodigoTipo
+			// 
+			this.txtCodigoTipo.Location = new System.Drawing.Point(106, 34);
+			this.txtCodigoTipo.MaxLength = 7;
+			this.txtCodigoTipo.Name = "txtCodigoTipo";
+			this.txtCodigoTipo.Size = new System.Drawing.Size(78, 26);
+			this.txtCodigoTipo.TabIndex = 7;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(18, 69);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(84, 18);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Descrição:";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(38, 37);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(64, 18);
+			this.label1.TabIndex = 5;
+			this.label1.Text = "Código:";
+			// 
+			// tabControl1
+			// 
+			this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tabControl1.Controls.Add(this.tpCadastro);
+			this.tabControl1.Location = new System.Drawing.Point(12, 41);
+			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.SelectedIndex = 0;
+			this.tabControl1.Size = new System.Drawing.Size(586, 334);
+			this.tabControl1.TabIndex = 4;
+			// 
 			// FrmTipos
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -394,7 +406,7 @@
 			this.Controls.Add(this.ssMensagem);
 			this.Controls.Add(this.barraDeFerramentas);
 			this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FrmTipos";
 			this.Text = "FrmTipos";
 			this.Load += new System.EventHandler(this.FrmTipos_Load);
@@ -404,8 +416,8 @@
 			this.ssMensagem.PerformLayout();
 			this.tpCadastro.ResumeLayout(false);
 			this.tpCadastro.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).EndInit();
 			this.tabControl1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -435,7 +447,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripStatusLabel stlbMensagem;
 		private System.Windows.Forms.TabPage tpCadastro;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView dgvTipos;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.TextBox txtDescricaoTipo;
