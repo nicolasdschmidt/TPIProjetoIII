@@ -1,0 +1,29 @@
+00Apocalipse Zumbi
+01Autobiografia
+02Biografia
+03Chick-Lit
+04Fantasia
+05Ficção Científica
+06Folhetim
+07Horror
+08Brutalista
+09Fantástica
+10Infanto-Juvenil
+11Metaficção
+12Neocrítica
+13Novelas de Cavalaria
+14Paródia
+15Sick-Lit
+16Space Opera
+17Suspense
+18Vampirismo
+19Gótica
+20Esotérica
+21Romances Espíritas
+22Auto-Ajuda
+23Negócios
+24Steampunk
+25Cyberpunk
+26Espiritualista
+27Aventura
+28Guerra
