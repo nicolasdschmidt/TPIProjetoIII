@@ -33,21 +33,18 @@ namespace apBiblioteca
 
 		private void livrosToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//    if (frmLivros == null)
 			frmLivros = new FrmLivros();
 			frmLivros.Show();
 		}
 
 		private void leitoresToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//      if (frmLeitores == null)
 			frmLeitores = new FrmLeitores();
 			frmLeitores.Show();
 		}
 
 		private void tiposToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//      if (frmLeitores == null)
 			frmTipos = new FrmTipos();
 			frmTipos.Show();
 		}

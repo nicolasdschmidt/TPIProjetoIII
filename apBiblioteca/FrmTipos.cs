@@ -22,12 +22,6 @@ namespace apBiblioteca
 
 		private void FrmTipos_Load(object sender, EventArgs e)
 		{
-			/*if (dlgAbrir.ShowDialog() == DialogResult.OK)
-			{
-				arquivoTipos = dlgAbrir.FileName;
-			}
-			else
-				Close();*/
 			osTipos = new VetorDados<Tipo>(50);
 			int indice = 0;
 			barraDeFerramentas.ImageList = imlBotoes;
