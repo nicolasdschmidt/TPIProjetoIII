@@ -79,7 +79,7 @@ namespace apBiblioteca
 				int indice = osLivros.PosicaoAtual;
 				txtCodigoLivro.Text = osLivros[indice].CodigoLivro + "";
 				txtTituloLivro.Text = osLivros[indice].TituloLivro;
-
+				// TODO: atualizar para usar código, e não índice
 				dgvTipoLivro.ClearSelection();
 				osTipos.PosicaoAtual = osLivros[indice].TipoLivro;
 				dgvTipoLivro.Rows[osTipos.PosicaoAtual].Selected = true;
