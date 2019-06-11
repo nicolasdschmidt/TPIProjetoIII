@@ -12,9 +12,9 @@ namespace apBiblioteca
 {
 	public partial class FrmLeitores : Form
 	{
-		VetorDados<Livro> osLivros; // osLivros armazenará os dados lidos e terá os métodos de manutenção
+		VetorDados<Livro> osLivros;                     // osLivros armazenará os dados lidos e terá os métodos de manutenção
 		VetorDados<Leitor> osLeitores;
-		int ondeIncluir = 0;        // global --> acessível na classe toda
+		int ondeIncluir = 0;                            // global --> acessível na classe toda
 
 		string nomeArquivoLeitores, nomeArquivoLivros;
 
@@ -28,15 +28,15 @@ namespace apBiblioteca
 			int indice = 0;
 			barraDeFerramentas.ImageList = imlBotoes;
 			foreach (ToolStripItem item in barraDeFerramentas.Items)
-				if (item is ToolStripButton) // se não é separador:
+				if (item is ToolStripButton)            // se não é separador:
 					(item as ToolStripButton).ImageIndex = indice++;
 
 			nomeArquivoLeitores = FrmBiblioteca.arqLeitores;
 			nomeArquivoLivros = FrmBiblioteca.arqLivros;
 
-			osLeitores = new VetorDados<Leitor>(50); // instancia com vetor dados com 50 posições
+			osLeitores = new VetorDados<Leitor>(50);    // instancia com vetor dados com 50 posições
 			osLeitores.LerDados(nomeArquivoLeitores);
-			osLivros = new VetorDados<Livro>(50); // instancia com vetor dados com 50 posições
+			osLivros = new VetorDados<Livro>(50);       // instancia com vetor dados com 50 posições
 			osLivros.LerDados(nomeArquivoLivros);
 
 		}

@@ -3,6 +3,6 @@ using System.IO;
 
 interface IRegistro
 {
-  void LerRegistro(StreamReader arq);
-  string ParaArquivo();
+	void LerRegistro(StreamReader arq);
+	string ParaArquivo();
 }
