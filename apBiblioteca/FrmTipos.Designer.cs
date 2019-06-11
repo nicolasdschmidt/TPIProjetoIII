@@ -365,6 +365,7 @@
 			this.txtCodigoTipo.Name = "txtCodigoTipo";
 			this.txtCodigoTipo.Size = new System.Drawing.Size(78, 26);
 			this.txtCodigoTipo.TabIndex = 7;
+			this.txtCodigoTipo.Leave += new System.EventHandler(this.txtCodigoTipo_Leave);
 			// 
 			// label2
 			// 

@@ -14,9 +14,8 @@ namespace apBiblioteca
 	{
 		VetorDados<Livro> osLivros; // osLivros armazenará os dados lidos e terá os métodos de manutenção
 		VetorDados<Leitor> osLeitores;
-		int ondeIncluir = 0;        // global --> acessível na classe toda
-
-		string nomeArquivoLeitores, nomeArquivoLivros;
+		VetorDados<Tipo> osTipos;
+		int ondeIncluir = 0; // global --> acessível na classe toda
 		public FrmLivros()
 		{
 			InitializeComponent();
@@ -31,21 +30,25 @@ namespace apBiblioteca
 					(item as ToolStripButton).ImageIndex = indice++;
 
 			osLivros = new VetorDados<Livro>(50); // instancia com vetor dados com 50 posições
-			dlgAbrir.Title = "Selecione o arquivo com os dados de livros";
-			if (dlgAbrir.ShowDialog() == DialogResult.OK)
-			{
-				nomeArquivoLivros = dlgAbrir.FileName;
-				osLivros.LerDados(nomeArquivoLivros);
-				btnInicio.PerformClick();
-			}
-
 			osLeitores = new VetorDados<Leitor>(50); // instancia com vetor dados com 50 posições
-			dlgAbrir.Title = "Selecione o arquivo com os dados de leitores";
-			if (dlgAbrir.ShowDialog() == DialogResult.OK)
+			osTipos = new VetorDados<Tipo>(50); // instancia com vetor dados com 50 posições
+			osLivros.LerDados(FrmBiblioteca.arqLivros);
+			osLeitores.LerDados(FrmBiblioteca.arqLeitores);
+			osTipos.LerDados(FrmBiblioteca.arqTipos);
+			osLivros.PosicionarNoPrimeiro();
+			AtualizarDataGridView();
+		}
+
+		private void AtualizarDataGridView()
+		{
+			dgvTipoLivro.Rows.Clear();
+			osTipos.Ordenar();
+			for (int i = 0; i < osTipos.Tamanho; i++)
 			{
-				nomeArquivoLeitores = dlgAbrir.FileName;
-				osLeitores.LerDados(nomeArquivoLeitores);
+				Tipo tipoAdicionar = osTipos[i];
+				dgvTipoLivro.Rows.Insert(i, tipoAdicionar.CodigoTipo, tipoAdicionar.NomeTipo);
 			}
+			AtualizarTela();
 		}
 
 		private void btnInicio_Click(object sender, EventArgs e)
@@ -77,8 +80,12 @@ namespace apBiblioteca
 				txtCodigoLivro.Text = osLivros[indice].CodigoLivro + "";
 				txtTituloLivro.Text = osLivros[indice].TituloLivro;
 
-				(grbTipoLivro.Controls[osLivros[indice].TipoLivro] as
-										 RadioButton).Checked = true;
+				dgvTipoLivro.ClearSelection();
+				osTipos.PosicaoAtual = osLivros[indice].TipoLivro;
+				dgvTipoLivro.Rows[osTipos.PosicaoAtual].Selected = true;
+				dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[osTipos.PosicaoAtual].Cells[0];
+				dgvTipoLivro.BeginEdit(true);
+				dgvTipoLivro.EndEdit();
 
 				txtLeitorComLivro.Text = "000000";
 				txtDataDevolucao.Text = "";
@@ -105,9 +112,9 @@ namespace apBiblioteca
 		{
 			txtCodigoLivro.Clear();
 			txtTituloLivro.Clear();
-			foreach (Control botao in grbTipoLivro.Controls)
-				if (botao is RadioButton)
-					(botao as RadioButton).Checked = false;
+			//foreach (Control botao in grbTipoLivro.Controls)
+			//	if (botao is RadioButton)
+			//		(botao as RadioButton).Checked = false;
 
 			txtLeitorComLivro.Text = "000000";
 			txtDataDevolucao.Text = "";
@@ -192,18 +199,19 @@ namespace apBiblioteca
 
 		private void btnSalvar_Click(object sender, EventArgs e)
 		{
-			int qualTipo = -1, qualRadioButton = -1;
-			for (int qualItem = 0; qualItem < grbTipoLivro.Controls.Count;
-					 qualItem++)
-				if (grbTipoLivro.Controls[qualItem] is RadioButton)
-				{
-					qualRadioButton++;
-					if ((grbTipoLivro.Controls[qualItem] as RadioButton).Checked)
-					{
-						qualTipo = qualRadioButton;
-						break;
-					}
-				}
+			int qualTipo = -1;
+			//for (int qualItem = 0; qualItem < grbTipoLivro.Controls.Count;
+			//		 qualItem++)
+			//	if (grbTipoLivro.Controls[qualItem] is RadioButton)
+			//	{
+			//		qualRadioButton++;
+			//		if ((grbTipoLivro.Controls[qualItem] as RadioButton).Checked)
+			//		{
+			//			qualTipo = qualRadioButton;
+			//			break;
+			//		}
+			//	}
+			qualTipo = int.Parse(dgvTipoLivro.SelectedCells[0].FormattedValue.ToString());
 			if (qualTipo == -1)
 				MessageBox.Show("Selecione um tipo de livro antes de salvar o registro!");
 			else
@@ -241,7 +249,7 @@ namespace apBiblioteca
 
 		private void FrmFunc_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			osLivros.GravarDados(nomeArquivoLivros);
+			osLivros.GravarDados(FrmBiblioteca.arqLivros);
 		}
 
 		private void btnExcluir_Click(object sender, EventArgs e)
@@ -286,6 +294,13 @@ namespace apBiblioteca
 			osLivros.SituacaoAtual = Situacao.navegando;
 			AtualizarTela();
 			btnSalvar.Enabled = false;
+		}
+
+		private void dgvTipoLivro_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			// ao clicar numa célula, seleciona a sua linha e define-a como a posição selecionada no vetor
+			(sender as DataGridView).CurrentRow.Selected = true;
+			osTipos.PosicaoAtual = (sender as DataGridView).CurrentCell.RowIndex;
 		}
 	}
 }

@@ -15,7 +15,6 @@ namespace apBiblioteca
 	{
 		VetorDados<Tipo> osTipos;
 
-		string arquivoTipos;
 		public FrmTipos()
 		{
 			InitializeComponent();
@@ -23,19 +22,19 @@ namespace apBiblioteca
 
 		private void FrmTipos_Load(object sender, EventArgs e)
 		{
-			if (dlgAbrir.ShowDialog() == DialogResult.OK)
+			/*if (dlgAbrir.ShowDialog() == DialogResult.OK)
 			{
 				arquivoTipos = dlgAbrir.FileName;
 			}
 			else
-				Close();
+				Close();*/
 			osTipos = new VetorDados<Tipo>(50);
 			int indice = 0;
 			barraDeFerramentas.ImageList = imlBotoes;
 			foreach (ToolStripItem item in barraDeFerramentas.Items)
 				if (item is ToolStripButton) // se não é separador:
 					(item as ToolStripButton).ImageIndex = indice++;
-			osTipos.LerDados(arquivoTipos);
+			osTipos.LerDados(FrmBiblioteca.arqTipos);
 			osTipos.PosicionarNoPrimeiro();
 			AtualizarDataGridView();
 		}
@@ -99,12 +98,10 @@ namespace apBiblioteca
 
 		private void btnProcurar_Click(object sender, EventArgs e)
 		{
-			/*int onde = -1;
-			Tipo tipoProcurado = new Tipo(byte.Parse(txtCodigoTipo.Text), txtDescricaoTipo.Text);
-			if (osTipos.Existe(tipoProcurado, ref onde))
-			{
-
-			}*/
+			LimparTela();
+			osTipos.SituacaoAtual = Situacao.pesquisando;
+			txtCodigoTipo.Focus();
+			stlbMensagem.Text = "Digite o código do livro que busca";
 		}
 
 		private void btnNovo_Click(object sender, EventArgs e)
@@ -191,13 +188,51 @@ namespace apBiblioteca
 		private void dgvTipos_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			// ao clicar numa célula, seleciona a sua linha e define-a como a posição selecionada no vetor
-			/*if ((sender as DataGridView).Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+			(sender as DataGridView).CurrentRow.Selected = true;
+			osTipos.PosicaoAtual = (sender as DataGridView).CurrentCell.RowIndex;
+			AtualizarDataGridView();
+		}
+
+		private void txtCodigoTipo_Leave(object sender, EventArgs e)
+		{
+			int ondeIncluir = -1;
+			if (txtCodigoTipo.Text == "")
+				MessageBox.Show("Digite um código válido!");
+			else
 			{
-				(sender as DataGridView).CurrentRow.Selected = true;
-				int indiceAtual = int.Parse((sender as DataGridView).Rows[e.RowIndex].Index);
-				osTipos.PosicionarEm(indiceAtual);
-				AtualizarTela();
-			}*/
+				var procurado = new Tipo(byte.Parse(txtCodigoTipo.Text), "");
+				switch (osTipos.SituacaoAtual)
+				{
+					case Situacao.incluindo:
+						if (osTipos.Existe(procurado, ref ondeIncluir))   // se já existe o código
+						{
+							MessageBox.Show("Código repetido; inclusão cancelada.");
+							osTipos.SituacaoAtual = Situacao.navegando;
+							AtualizarTela(); // restaura o registro visível anteriormente
+						}
+						else // o código ainda não existe no vetor dados
+						{
+							txtDescricaoTipo.Focus();
+							stlbMensagem.Text = "Digite os demais dados. Após isso pressione [Salvar]";
+						}
+						break;
+					case Situacao.pesquisando:
+						int ondeAchou = 0;
+						if (!osTipos.Existe(procurado, ref ondeAchou))
+						{
+							MessageBox.Show("Código não foi cadastrado ainda.");
+							AtualizarTela();
+							osTipos.SituacaoAtual = Situacao.navegando;
+						}
+						else  // encontrou o código procurado na posição ondeAchou
+						{
+							osTipos.PosicaoAtual = ondeAchou;
+							AtualizarTela();
+							osTipos.SituacaoAtual = Situacao.navegando;
+						}
+						break;
+				}
+			}
 		}
 	}
 }

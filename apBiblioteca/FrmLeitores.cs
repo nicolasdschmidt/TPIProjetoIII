@@ -31,22 +31,14 @@ namespace apBiblioteca
 				if (item is ToolStripButton) // se não é separador:
 					(item as ToolStripButton).ImageIndex = indice++;
 
-			osLeitores = new VetorDados<Leitor>(50); // instancia com vetor dados com 50 posições
-			dlgAbrir.Title = "Selecione o arquivo com os dados de leitores";
-			if (dlgAbrir.ShowDialog() == DialogResult.OK)
-			{
-				nomeArquivoLeitores = dlgAbrir.FileName;
-				osLeitores.LerDados(nomeArquivoLeitores);
-				btnInicio.PerformClick();
-			}
+			nomeArquivoLeitores = FrmBiblioteca.arqLeitores;
+			nomeArquivoLivros = FrmBiblioteca.arqLivros;
 
+			osLeitores = new VetorDados<Leitor>(50); // instancia com vetor dados com 50 posições
+			osLeitores.LerDados(nomeArquivoLeitores);
 			osLivros = new VetorDados<Livro>(50); // instancia com vetor dados com 50 posições
-			dlgAbrir.Title = "Selecione o arquivo com os dados de livros";
-			if (dlgAbrir.ShowDialog() == DialogResult.OK)
-			{
-				nomeArquivoLivros = dlgAbrir.FileName;
-				osLivros.LerDados(nomeArquivoLivros);
-			}
+			osLivros.LerDados(nomeArquivoLivros);
+
 		}
 
 		private void btnInicio_Click(object sender, EventArgs e)
