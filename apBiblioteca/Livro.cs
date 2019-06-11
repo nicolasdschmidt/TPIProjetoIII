@@ -19,7 +19,7 @@ namespace apBiblioteca
 
 		string codigoLivro;
 		string tituloLivro;
-		int tipoLivro;
+		byte tipoLivro;
 		DateTime dataDevolucao;
 		string codigoLeitorComLivro;
 
@@ -77,8 +77,8 @@ namespace apBiblioteca
 			get => tipoLivro;
 			set
 			{
-				if (value > 0 && value < 10)
-					tipoLivro = value;
+				if (value > 0 && value < 100)
+					tipoLivro = byte.Parse(value.ToString());
 			}
 		}
 		public DateTime DataDevolucao
