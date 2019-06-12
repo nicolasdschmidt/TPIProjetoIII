@@ -455,7 +455,7 @@
 			this.lsbLivros.ItemHeight = 16;
 			this.lsbLivros.Location = new System.Drawing.Point(8, 6);
 			this.lsbLivros.Name = "lsbLivros";
-			this.lsbLivros.Size = new System.Drawing.Size(557, 164);
+			this.lsbLivros.Size = new System.Drawing.Size(645, 308);
 			this.lsbLivros.TabIndex = 0;
 			// 
 			// ssMensagem

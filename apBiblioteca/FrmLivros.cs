@@ -281,7 +281,7 @@ namespace apBiblioteca
 
 		private void tpLista_Enter(object sender, EventArgs e)
 		{
-			osLivros.ExibirDados(lsbLivros, "Código  Título");
+			osLivros.ExibirDados(lsbLivros, "Código  Título                        Tipo Devolução  Leitor com o livro");
 		}
 
 		private void btnEditar_Click(object sender, EventArgs e)

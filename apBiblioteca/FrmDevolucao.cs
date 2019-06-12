@@ -72,7 +72,13 @@ namespace apBiblioteca
 		private void cbLivro_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			btnDevolver.Enabled = true;
-			osLivros.PosicaoAtual = cbLivro.SelectedIndex;
+			for (int i = 0; i < osLivros.Tamanho; i++)
+			{
+				if (osLivros[i].TituloLivro.Trim() == cbLivro.SelectedItem.ToString().Trim())
+				{
+					osLivros.PosicaoAtual = i;
+				}
+			}
 		}
 	}
 }
