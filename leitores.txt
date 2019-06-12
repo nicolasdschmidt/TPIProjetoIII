@@ -1,5 +1,5 @@
-000001Francisco da Fonseca Rodrigues     Campinas                                           0
-000002Sérgio Luiz Moral Marques          Campinas                                           0
-000003Patrícia Gagliardo de Campos       Campinas                                           0
-000004Samuel Antônio de Oliveira         Campinas                                           10000010
-000005Simone Pierini Facini Rocha        Campinas                                           0
+000001Francisco da Fonseca Rodrigues     Campinas                                           10000010
+000002Sérgio Luiz Moral Marques          Campinas                                           200000080000002
+000003Patrícia Gagliardo de Campos       Campinas                                           10000003
+000004Samuel Antônio de Oliveira         Campinas                                           10000009
+000005Simone Pierini Facini Rocha        Campinas                                           10000004
