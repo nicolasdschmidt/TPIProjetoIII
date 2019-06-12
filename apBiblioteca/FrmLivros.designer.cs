@@ -50,6 +50,8 @@
 			this.tpCadastro = new System.Windows.Forms.TabPage();
 			this.grbTipoLivro = new System.Windows.Forms.GroupBox();
 			this.dgvTipoLivro = new System.Windows.Forms.DataGridView();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.txtDataDevolucao = new System.Windows.Forms.TextBox();
 			this.txtNomeLeitor = new System.Windows.Forms.TextBox();
@@ -67,8 +69,6 @@
 			this.stlbMensagem = new System.Windows.Forms.ToolStripStatusLabel();
 			this.imlBotoes = new System.Windows.Forms.ImageList(this.components);
 			this.dlgAbrir = new System.Windows.Forms.OpenFileDialog();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.barraDeFerramentas.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tpCadastro.SuspendLayout();
@@ -309,6 +309,7 @@
             this.Column1,
             this.Column2});
 			this.dgvTipoLivro.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvTipoLivro.Enabled = false;
 			this.dgvTipoLivro.Location = new System.Drawing.Point(3, 22);
 			this.dgvTipoLivro.MultiSelect = false;
 			this.dgvTipoLivro.Name = "dgvTipoLivro";
@@ -316,6 +317,22 @@
 			this.dgvTipoLivro.Size = new System.Drawing.Size(595, 114);
 			this.dgvTipoLivro.TabIndex = 0;
 			this.dgvTipoLivro.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTipoLivro_CellClick);
+			// 
+			// Column1
+			// 
+			this.Column1.HeaderText = "#";
+			this.Column1.MinimumWidth = 50;
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Width = 50;
+			// 
+			// Column2
+			// 
+			this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Column2.HeaderText = "Tipo";
+			this.Column2.MinimumWidth = 200;
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
 			// 
 			// groupBox2
 			// 
@@ -331,10 +348,11 @@
 			this.groupBox2.Size = new System.Drawing.Size(626, 91);
 			this.groupBox2.TabIndex = 6;
 			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "informações de empréstimo";
+			this.groupBox2.Text = "Informações de Empréstimo";
 			// 
 			// txtDataDevolucao
 			// 
+			this.txtDataDevolucao.Enabled = false;
 			this.txtDataDevolucao.Location = new System.Drawing.Point(160, 57);
 			this.txtDataDevolucao.MaxLength = 7;
 			this.txtDataDevolucao.Name = "txtDataDevolucao";
@@ -344,6 +362,7 @@
 			// 
 			// txtNomeLeitor
 			// 
+			this.txtNomeLeitor.Enabled = false;
 			this.txtNomeLeitor.Location = new System.Drawing.Point(265, 23);
 			this.txtNomeLeitor.MaxLength = 35;
 			this.txtNomeLeitor.Name = "txtNomeLeitor";
@@ -353,6 +372,7 @@
 			// 
 			// txtLeitorComLivro
 			// 
+			this.txtLeitorComLivro.Enabled = false;
 			this.txtLeitorComLivro.Location = new System.Drawing.Point(160, 25);
 			this.txtLeitorComLivro.MaxLength = 7;
 			this.txtLeitorComLivro.Name = "txtLeitorComLivro";
@@ -419,7 +439,7 @@
 			this.tpLista.Location = new System.Drawing.Point(4, 27);
 			this.tpLista.Name = "tpLista";
 			this.tpLista.Padding = new System.Windows.Forms.Padding(3);
-			this.tpLista.Size = new System.Drawing.Size(603, 290);
+			this.tpLista.Size = new System.Drawing.Size(659, 331);
 			this.tpLista.TabIndex = 1;
 			this.tpLista.Text = "Lista";
 			this.tpLista.UseVisualStyleBackColor = true;
@@ -492,22 +512,6 @@
 			// 
 			this.dlgAbrir.CheckFileExists = false;
 			this.dlgAbrir.DefaultExt = "*.txt";
-			// 
-			// Column1
-			// 
-			this.Column1.HeaderText = "#";
-			this.Column1.MinimumWidth = 50;
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			this.Column1.Width = 50;
-			// 
-			// Column2
-			// 
-			this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Column2.HeaderText = "Tipo";
-			this.Column2.MinimumWidth = 200;
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
 			// 
 			// FrmLivros
 			// 

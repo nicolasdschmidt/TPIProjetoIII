@@ -79,13 +79,22 @@ namespace apBiblioteca
 				int indice = osLivros.PosicaoAtual;
 				txtCodigoLivro.Text = osLivros[indice].CodigoLivro + "";
 				txtTituloLivro.Text = osLivros[indice].TituloLivro;
-				// TODO: atualizar para usar código, e não índice
 				dgvTipoLivro.ClearSelection();
-				osTipos.PosicaoAtual = osLivros[indice].TipoLivro;
-				dgvTipoLivro.Rows[osTipos.PosicaoAtual].Selected = true;
-				dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[osTipos.PosicaoAtual].Cells[0];
-				dgvTipoLivro.BeginEdit(true);
-				dgvTipoLivro.EndEdit();
+				osTipos.PosicaoAtual = osLivros[indice].TipoLivro - 1;
+				for (int i = 0; i < dgvTipoLivro.RowCount; i++)
+				{
+					if (int.Parse(dgvTipoLivro.Rows[i].Cells[0].Value.ToString()) == osTipos[osTipos.PosicaoAtual].CodigoTipo)
+					{
+						dgvTipoLivro.Rows[i].Selected = true;
+						dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[i].Cells[0];
+						dgvTipoLivro.BeginEdit(true);
+						dgvTipoLivro.EndEdit();
+					}
+				}
+				//dgvTipoLivro.Rows[osTipos.PosicaoAtual].Selected = true;
+				//dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[osTipos.PosicaoAtual].Cells[0];
+				//dgvTipoLivro.BeginEdit(true);
+				//dgvTipoLivro.EndEdit();
 
 				txtLeitorComLivro.Text = "000000";
 				txtDataDevolucao.Text = "";
@@ -149,6 +158,7 @@ namespace apBiblioteca
 			// Exibimos mensagem no statusStrip para instruir o usuário a digitar dados
 			stlbMensagem.Text = "Digite o código do novo livro";
 
+			dgvTipoLivro.Enabled = true;
 			btnSalvar.Enabled = true;
 		}
 
@@ -209,6 +219,7 @@ namespace apBiblioteca
 				osLivros.Incluir(novoDado, ondeIncluir);
 				// para mudar o registro com o qual trabalhamos no momento
 				osLivros.PosicaoAtual = ondeIncluir;
+				dgvTipoLivro.Enabled = false;
 				AtualizarTela();
 				osLivros.SituacaoAtual = Situacao.navegando; // termina o modo de inclusão
 			}
@@ -221,6 +232,7 @@ namespace apBiblioteca
 					  osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro);
 				osLivros.SituacaoAtual = Situacao.navegando;
 				txtCodigoLivro.ReadOnly = false;
+				dgvTipoLivro.Enabled = false;
 				AtualizarTela();
 			}
 			btnSalvar.Enabled = false;
@@ -268,6 +280,7 @@ namespace apBiblioteca
 		{
 			osLivros.SituacaoAtual = Situacao.editando;
 			txtCodigoLivro.ReadOnly = true;  // para não permitir alterar a matrícula
+			dgvTipoLivro.Enabled = true;
 			stlbMensagem.Text = "Modifique os campos desejados e pressione [Salvar]";
 			txtTituloLivro.Focus();
 
