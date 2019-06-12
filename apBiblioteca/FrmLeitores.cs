@@ -38,7 +38,11 @@ namespace apBiblioteca
 			osLeitores.LerDados(nomeArquivoLeitores);
 			osLivros = new VetorDados<Livro>(50);       // instancia com vetor dados com 50 posições
 			osLivros.LerDados(nomeArquivoLivros);
-
+			if (osLeitores != null)
+				osLeitores.PosicionarNoPrimeiro();
+			AtualizarTela();
+			if (FrmBiblioteca.consulta)
+				tabControl1.SelectedTab = tpLista;
 		}
 
 		private void btnInicio_Click(object sender, EventArgs e)
@@ -228,16 +232,21 @@ namespace apBiblioteca
 
 		private void btnExcluir_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(
-				   "Deseja realmente excluir?", "Exclusão",
-				   MessageBoxButtons.YesNo,
-				   MessageBoxIcon.Warning) == DialogResult.Yes)
+			if (osLeitores[osLeitores.PosicaoAtual].QuantosLivrosComLeitor == 0)
 			{
-				osLeitores.Excluir(osLeitores.PosicaoAtual);
-				if (osLeitores.PosicaoAtual >= osLeitores.Tamanho)
-					osLeitores.PosicionarNoUltimo();
-				AtualizarTela();
+				if (MessageBox.Show(
+					   "Deseja realmente excluir?", "Exclusão",
+					   MessageBoxButtons.YesNo,
+					   MessageBoxIcon.Warning) == DialogResult.Yes)
+				{
+					osLeitores.Excluir(osLeitores.PosicaoAtual);
+					if (osLeitores.PosicaoAtual >= osLeitores.Tamanho)
+						osLeitores.PosicionarNoUltimo();
+					AtualizarTela();
+				}
 			}
+			else
+				MessageBox.Show($"O leitor não pode ser excluído, pois está com {osLeitores[osLeitores.PosicaoAtual].QuantosLivrosComLeitor} livros.", "Falha ao excluir o leitor", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void btnProcurar_Click(object sender, EventArgs e)
@@ -250,7 +259,7 @@ namespace apBiblioteca
 
 		private void tpLista_Enter(object sender, EventArgs e)
 		{
-			osLeitores.ExibirDados(lsbLivros, "Código  Nome                           Endereço");
+			osLeitores.ExibirDados(lsbLivros, "Código Nome                                Endereço");
 		}
 
 		private void btnEditar_Click(object sender, EventArgs e)
@@ -264,6 +273,11 @@ namespace apBiblioteca
 		}
 
 		private void dgvLivros_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
+
+		private void tabControl1_Enter(object sender, EventArgs e)
 		{
 
 		}

@@ -46,6 +46,11 @@ namespace apBiblioteca
 			return codigoTipo.CompareTo(outro.codigoTipo);
 		}
 
+		public override string ToString()
+		{
+			return CodigoTipo.ToString().PadRight(7) + NomeTipo.ToString();
+		}
+
 		public byte CodigoTipo { get => codigoTipo; set => codigoTipo = value; }
 		public string NomeTipo { get => nomeTipo; set => nomeTipo = value.Trim(); }
 	}

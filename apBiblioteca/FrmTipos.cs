@@ -31,6 +31,8 @@ namespace apBiblioteca
 			osTipos.LerDados(FrmBiblioteca.arqTipos);
 			osTipos.PosicionarNoPrimeiro();
 			AtualizarDataGridView();
+			if (FrmBiblioteca.consulta)
+				tabControl1.SelectedTab = tpLista;
 		}
 
 		private void AtualizarDataGridView()
@@ -227,6 +229,11 @@ namespace apBiblioteca
 						break;
 				}
 			}
+		}
+
+		private void tpLista_Enter(object sender, EventArgs e)
+		{
+			osTipos.ExibirDados(lsbTipos, "Código Descrição");
 		}
 	}
 }

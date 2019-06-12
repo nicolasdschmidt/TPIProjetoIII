@@ -35,8 +35,11 @@ namespace apBiblioteca
 			osLivros.LerDados(FrmBiblioteca.arqLivros);
 			osLeitores.LerDados(FrmBiblioteca.arqLeitores);
 			osTipos.LerDados(FrmBiblioteca.arqTipos);
-			osLivros.PosicionarNoPrimeiro();
+			if (osLivros != null)
+				osLivros.PosicionarNoPrimeiro();
 			AtualizarDataGridView();
+			if (FrmBiblioteca.consulta)
+				tabControl1.SelectedTab = tpLista;
 		}
 
 		private void AtualizarDataGridView()
@@ -251,16 +254,21 @@ namespace apBiblioteca
 
 		private void btnExcluir_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show(
-				   "Deseja realmente excluir?", "Exclusão",
-				   MessageBoxButtons.YesNo,
-				   MessageBoxIcon.Warning) == DialogResult.Yes)
+			if (int.Parse(osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro) == 0)
 			{
-				osLivros.Excluir(osLivros.PosicaoAtual);
-				if (osLivros.PosicaoAtual >= osLivros.Tamanho)
-					osLivros.PosicionarNoUltimo();
-				AtualizarTela();
+				if (MessageBox.Show(
+					   $"Deseja realmente excluir {osLivros[osLivros.PosicaoAtual].TituloLivro.Trim()} ({osLivros[osLivros.PosicaoAtual].CodigoLivro})?", "Exclusão",
+					   MessageBoxButtons.YesNo,
+					   MessageBoxIcon.Warning) == DialogResult.Yes)
+				{
+					osLivros.Excluir(osLivros.PosicaoAtual);
+					if (osLivros.PosicaoAtual >= osLivros.Tamanho)
+						osLivros.PosicionarNoUltimo();
+					AtualizarTela();
+				}
 			}
+			else
+				MessageBox.Show($"O livro não pode ser excluído, pois está emprestado ao leitor {osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro}", "Falha ao excluir o livro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		private void btnProcurar_Click(object sender, EventArgs e)

@@ -129,9 +129,55 @@ namespace apBiblioteca
 				else
 					MessageBox.Show($"O leitor ({CodigoLeitor}) {NomeLeitor.Trim()} já possui o número máximo de livros emprestados", "Máximo de livros alcançado", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-			// TODO: mostrar data de devolução prevista
 			else
-				MessageBox.Show("O livro selecionado já está emprestado", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			{
+				string diaSemana = livroAEmprestar.DataDevolucao.DayOfWeek.ToString();
+				switch (diaSemana)
+				{
+					case "Sunday":		diaSemana = "domingo";			break;
+					case "Monday":		diaSemana = "segunda-feira";	break;
+					case "Tuesday":		diaSemana = "terça-feira";		break;
+					case "Wednesday":	diaSemana = "quarta-feira";		break;
+					case "Thursday":	diaSemana = "quinta-feira";		break;
+					case "Friday":		diaSemana = "sexta-feira";		break;
+					case "Saturday":	diaSemana = "sábado";			break;
+				}
+				string dia = livroAEmprestar.DataDevolucao.Day.ToString();
+				string mes = livroAEmprestar.DataDevolucao.Month.ToString();
+				switch (mes)
+				{
+					case "1": mes  = "janeiro";		break;
+					case "2": mes  = "fevereiro";	break;
+					case "3": mes  = "março";		break;
+					case "4": mes  = "abril";		break;
+					case "5": mes  = "maio";		break;
+					case "6": mes  = "junho";		break;
+					case "7": mes  = "julho";		break;
+					case "8": mes  = "agosto";		break;
+					case "9": mes  = "setembro";	break;
+					case "10": mes = "outubro";		break;
+					case "11": mes = "novembro";	break;
+					case "12": mes = "dezembro";	break;
+				}
+				string ano = livroAEmprestar.DataDevolucao.Year.ToString();
+				MessageBox.Show($"O livro selecionado já está emprestado.{Environment.NewLine}" +
+					$"A data de devolução prevista é {diaSemana}, {dia} de {mes} de {ano}.", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);			}
+		}
+
+		public void Devolver(Livro livroADevolver)
+		{
+			for (int i = 0; i < QuantosLivrosComLeitor; i++)
+			{
+				if (CodigoLivroComLeitor[i] == livroADevolver.CodigoLivro)
+				{
+					for (int j = i; j < QuantosLivrosComLeitor; j++)
+					{
+						CodigoLivroComLeitor[j] = CodigoLivroComLeitor[j + 1];
+					}
+					QuantosLivrosComLeitor--;
+					livroADevolver.CodigoLeitorComLivro = "000000";
+				}
+			}
 		}
 
 		public override String ToString()

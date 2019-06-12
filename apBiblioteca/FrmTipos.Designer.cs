@@ -60,11 +60,14 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tpLista = new System.Windows.Forms.TabPage();
+			this.lsbTipos = new System.Windows.Forms.ListBox();
 			this.barraDeFerramentas.SuspendLayout();
 			this.ssMensagem.SuspendLayout();
 			this.tpCadastro.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).BeginInit();
 			this.tabControl1.SuspendLayout();
+			this.tpLista.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// barraDeFerramentas
@@ -391,11 +394,34 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.tabControl1.Controls.Add(this.tpCadastro);
+			this.tabControl1.Controls.Add(this.tpLista);
 			this.tabControl1.Location = new System.Drawing.Point(12, 41);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
 			this.tabControl1.Size = new System.Drawing.Size(586, 334);
 			this.tabControl1.TabIndex = 4;
+			// 
+			// tpLista
+			// 
+			this.tpLista.BackColor = System.Drawing.Color.Transparent;
+			this.tpLista.Controls.Add(this.lsbTipos);
+			this.tpLista.Location = new System.Drawing.Point(4, 27);
+			this.tpLista.Name = "tpLista";
+			this.tpLista.Padding = new System.Windows.Forms.Padding(3);
+			this.tpLista.Size = new System.Drawing.Size(578, 303);
+			this.tpLista.TabIndex = 1;
+			this.tpLista.Text = "Lista";
+			this.tpLista.Enter += new System.EventHandler(this.tpLista_Enter);
+			// 
+			// lsbTipos
+			// 
+			this.lsbTipos.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lsbTipos.FormattingEnabled = true;
+			this.lsbTipos.ItemHeight = 16;
+			this.lsbTipos.Location = new System.Drawing.Point(6, 6);
+			this.lsbTipos.Name = "lsbTipos";
+			this.lsbTipos.Size = new System.Drawing.Size(502, 164);
+			this.lsbTipos.TabIndex = 0;
 			// 
 			// FrmTipos
 			// 
@@ -419,6 +445,7 @@
 			this.tpCadastro.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvTipos)).EndInit();
 			this.tabControl1.ResumeLayout(false);
+			this.tpLista.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -456,5 +483,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabPage tpLista;
+		private System.Windows.Forms.ListBox lsbTipos;
 	}
 }

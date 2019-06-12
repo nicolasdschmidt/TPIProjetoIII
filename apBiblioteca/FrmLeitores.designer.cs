@@ -30,7 +30,7 @@
     {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLeitores));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.barraDeFerramentas = new System.Windows.Forms.ToolStrip();
 			this.btnInicio = new System.Windows.Forms.ToolStripButton();
 			this.btnAnterior = new System.Windows.Forms.ToolStripButton();
@@ -327,8 +327,8 @@
 			// 
 			// Column4
 			// 
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column4.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
 			this.Column4.HeaderText = "Atraso?";
 			this.Column4.Name = "Column4";
 			this.Column4.ReadOnly = true;

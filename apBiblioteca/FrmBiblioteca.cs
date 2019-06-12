@@ -17,10 +17,13 @@ namespace apBiblioteca
 		FrmLeitores frmLeitores;
 		FrmTipos frmTipos;
 		FrmEmprestimo frmEmprestimo;
+		FrmDevolucao frmDevolucao;
 
-		public static string arqLivros = "Z:\\1o semestre\\Técnicas De Programação\\Projeto III Git\\TPProjetoIII\\livros.txt";
-		public static string arqLeitores = "Z:\\1o semestre\\Técnicas De Programação\\Projeto III Git\\TPProjetoIII\\leitores.txt";
-		public static string arqTipos = "Z:\\1o semestre\\Técnicas De Programação\\Projeto III Git\\TPProjetoIII\\tipos.txt";
+		public static bool consulta = false;
+
+		public static string arqLivros = "..\\..\\..\\livros.txt";
+		public static string arqLeitores = "..\\..\\..\\leitores.txt";
+		public static string arqTipos = "..\\..\\..\\tipos.txt";
 
 		public FrmBiblioteca()
 		{
@@ -34,18 +37,21 @@ namespace apBiblioteca
 
 		private void livrosToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			consulta = false;
 			frmLivros = new FrmLivros();
 			frmLivros.Show();
 		}
 
 		private void leitoresToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			consulta = false;
 			frmLeitores = new FrmLeitores();
 			frmLeitores.Show();
 		}
 
 		private void tiposToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			consulta = false;
 			frmTipos = new FrmTipos();
 			frmTipos.Show();
 		}
@@ -87,8 +93,37 @@ namespace apBiblioteca
 
 		private void empréstimosToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			consulta = false;
 			frmEmprestimo = new FrmEmprestimo();
 			frmEmprestimo.Show();
+		}
+
+		private void devoluçõesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			consulta = false;
+			frmDevolucao = new FrmDevolucao();
+			frmDevolucao.Show();
+		}
+
+		private void livrosToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			consulta = true;
+			frmLivros = new FrmLivros();
+			frmLivros.Show();
+		}
+
+		private void leitoresToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			consulta = true;
+			frmLeitores = new FrmLeitores();
+			frmLeitores.Show();
+		}
+
+		private void tiposToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			consulta = true;
+			frmTipos = new FrmTipos();
+			frmTipos.Show();
 		}
 	}
 }
