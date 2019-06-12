@@ -125,6 +125,7 @@ namespace apBiblioteca
 					CodigoLivroComLeitor[QuantosLivrosComLeitor] = livroAEmprestar.CodigoLivro;
 					QuantosLivrosComLeitor++;
 					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;
+					MessageBox.Show($"{livroAEmprestar.TituloLivro.Trim()} foi emprestado a {NomeLeitor.Trim()}.", "Empréstimo realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 				else
 					MessageBox.Show($"O leitor ({CodigoLeitor}) {NomeLeitor.Trim()} já possui o número máximo de livros emprestados", "Máximo de livros alcançado", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -176,6 +177,7 @@ namespace apBiblioteca
 					}
 					QuantosLivrosComLeitor--;
 					livroADevolver.CodigoLeitorComLivro = "000000";
+					MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 			}
 		}
