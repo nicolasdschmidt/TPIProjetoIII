@@ -71,9 +71,9 @@ namespace apBiblioteca
 			if (!osLeitores.EstaVazio)
 			{
 				Leitor oLeitor = osLeitores[osLeitores.PosicaoAtual];
-				txtCodigoLeitor.Text = oLeitor.CodigoLeitor + "";
-				txtNomeLeitor.Text = oLeitor.NomeLeitor;
-				txtEndereco.Text = oLeitor.EnderecoLeitor;
+				txtCodigoLeitor.Text = (oLeitor.CodigoLeitor + "").Trim();
+				txtNomeLeitor.Text = oLeitor.NomeLeitor.Trim();
+				txtEndereco.Text = oLeitor.EnderecoLeitor.Trim();
 				dgvLivros.RowCount = oLeitor.QuantosLivrosComLeitor + 1;
 
 				for (int umLivro = 0;

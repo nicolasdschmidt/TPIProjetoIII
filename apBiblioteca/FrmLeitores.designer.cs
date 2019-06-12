@@ -30,7 +30,7 @@
     {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLeitores));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.barraDeFerramentas = new System.Windows.Forms.ToolStrip();
 			this.btnInicio = new System.Windows.Forms.ToolStripButton();
 			this.btnAnterior = new System.Windows.Forms.ToolStripButton();
@@ -327,8 +327,8 @@
 			// 
 			// Column4
 			// 
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			this.Column4.DefaultCellStyle = dataGridViewCellStyle1;
 			this.Column4.HeaderText = "Atraso?";
 			this.Column4.Name = "Column4";
 			this.Column4.ReadOnly = true;
@@ -348,7 +348,7 @@
 			this.txtEndereco.Location = new System.Drawing.Point(96, 71);
 			this.txtEndereco.MaxLength = 50;
 			this.txtEndereco.Name = "txtEndereco";
-			this.txtEndereco.Size = new System.Drawing.Size(348, 26);
+			this.txtEndereco.Size = new System.Drawing.Size(376, 26);
 			this.txtEndereco.TabIndex = 6;
 			// 
 			// label3
@@ -365,7 +365,7 @@
 			this.txtNomeLeitor.Location = new System.Drawing.Point(96, 39);
 			this.txtNomeLeitor.MaxLength = 35;
 			this.txtNomeLeitor.Name = "txtNomeLeitor";
-			this.txtNomeLeitor.Size = new System.Drawing.Size(233, 26);
+			this.txtNomeLeitor.Size = new System.Drawing.Size(376, 26);
 			this.txtNomeLeitor.TabIndex = 4;
 			// 
 			// txtCodigoLeitor
@@ -373,7 +373,7 @@
 			this.txtCodigoLeitor.Location = new System.Drawing.Point(96, 7);
 			this.txtCodigoLeitor.MaxLength = 6;
 			this.txtCodigoLeitor.Name = "txtCodigoLeitor";
-			this.txtCodigoLeitor.Size = new System.Drawing.Size(78, 26);
+			this.txtCodigoLeitor.Size = new System.Drawing.Size(115, 26);
 			this.txtCodigoLeitor.TabIndex = 3;
 			this.txtCodigoLeitor.Leave += new System.EventHandler(this.txtMatricula_Leave);
 			// 
