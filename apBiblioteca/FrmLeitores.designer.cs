@@ -486,7 +486,7 @@
 			this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FrmLeitores";
-			this.Text = "Manutenção de Livros";
+			this.Text = "Manutenção de Leitores";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmFunc_FormClosing);
 			this.Load += new System.EventHandler(this.FrmFunc_Load);
 			this.barraDeFerramentas.ResumeLayout(false);

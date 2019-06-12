@@ -298,7 +298,7 @@
 			this.grbTipoLivro.Size = new System.Drawing.Size(601, 139);
 			this.grbTipoLivro.TabIndex = 7;
 			this.grbTipoLivro.TabStop = false;
-			this.grbTipoLivro.Text = "Tipo";
+			this.grbTipoLivro.Text = "Tipo do Livro";
 			// 
 			// dgvTipoLivro
 			// 

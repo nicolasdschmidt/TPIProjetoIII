@@ -16,6 +16,7 @@ namespace apBiblioteca
 		FrmLivros frmLivros;
 		FrmLeitores frmLeitores;
 		FrmTipos frmTipos;
+		FrmEmprestimo frmEmprestimo;
 
 		public static string arqLivros = "Z:\\1o semestre\\Técnicas De Programação\\Projeto III Git\\TPProjetoIII\\livros.txt";
 		public static string arqLeitores = "Z:\\1o semestre\\Técnicas De Programação\\Projeto III Git\\TPProjetoIII\\leitores.txt";
@@ -82,6 +83,12 @@ namespace apBiblioteca
 					}
 				}
 			}
+		}
+
+		private void empréstimosToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			frmEmprestimo = new FrmEmprestimo();
+			frmEmprestimo.Show();
 		}
 	}
 }

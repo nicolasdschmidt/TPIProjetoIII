@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace apBiblioteca
 {
@@ -114,6 +115,25 @@ namespace apBiblioteca
 				saida += CodigoLivroComLeitor[indice];
 			return saida;
 		}
+
+		public void Emprestar(Livro livroAEmprestar)
+		{ 
+			if (int.Parse(livroAEmprestar.CodigoLeitorComLivro) == 0)
+			{
+				if (QuantosLivrosComLeitor <= 5)
+				{
+					CodigoLivroComLeitor[QuantosLivrosComLeitor] = livroAEmprestar.CodigoLivro;
+					QuantosLivrosComLeitor++;
+					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;
+				}
+				else
+					MessageBox.Show($"O leitor ({CodigoLeitor}) {NomeLeitor.Trim()} já possui o número máximo de livros emprestados", "Máximo de livros alcançado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			// TODO: mostrar data de devolução prevista
+			else
+				MessageBox.Show("O livro selecionado já está emprestado", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
 		public override String ToString()
 		{
 			string saida = CodigoLeitor + " " + NomeLeitor + " " + EnderecoLeitor + " " +
