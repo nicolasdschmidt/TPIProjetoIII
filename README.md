@@ -27,6 +27,11 @@
 - Finalização do formulário de manutenção de *Tipos*
 - Adaptação do formulário de manutenção de *Livros*, para que funcionasse com o DataGridView de seleção de *Tipo*
 
+12/06
+- Criação dos formulários de *Empréstimo* e *Devolução*
+- Adaptação dos métodos *Excluir* para que fossem buscadas relações com outras classes
+- Criação dos métodos de consulta às listas de *Livros*, *Tipos* e *Leitores*
+
 Erros e dificuldades encontradas:
 - Dificuldade para gerenciar seleções no DataGridView
 
