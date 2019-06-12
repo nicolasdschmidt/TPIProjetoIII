@@ -45,7 +45,7 @@ namespace apBiblioteca
 						for (int j = 0; j < osLivros.Tamanho; j++)
 						{
 							if (osLivros[j].CodigoLivro == codLivro)
-								cbLivro.Items.Add(osLivros[j].TituloLivro);
+								cbLivro.Items.Add(osLivros[j].TituloLivro.Trim());
 						}
 					}
 				}
