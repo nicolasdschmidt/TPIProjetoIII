@@ -125,6 +125,7 @@ namespace apBiblioteca
 					CodigoLivroComLeitor[QuantosLivrosComLeitor] = livroAEmprestar.CodigoLivro;
 					QuantosLivrosComLeitor++;
 					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;
+					livroAEmprestar.DataDevolucao = DateTime.Now.AddDays(7); // define a data de devolução como uma semana depois do empréstimo
 					MessageBox.Show($"{livroAEmprestar.TituloLivro.Trim()} foi emprestado a {NomeLeitor.Trim()}.", "Empréstimo realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 				else
