@@ -1,10 +1,10 @@
-0000001Física I                        131/12/1899000000
-0000002Física II                       131/12/1899000002
-0000003Fahrenheit 451                  331/12/1899000003
-00000041984                            331/12/1899000005
-0000005Animal Farm                     331/12/1899000000
-0000006Ostra feliz não faz pérola      231/12/1899000000
-0000007A alegria de ensinar            231/12/1899000000
-0000008The Art of Deception            131/12/1899000002
-0000009A Brief History of Time         131/12/1899000004
-0000010The Stars, Like Dust            331/12/1899000001
+0000001Física I                        129/06/2019000000
+0000002Física II                       124/06/2019000002
+0000003Fahrenheit 451                  322/06/2019000003
+00000041984                            325/06/2019000005
+0000005Animal Farm                     327/06/2019000000
+0000006Ostra feliz não faz pérola      226/06/2019000000
+0000007A alegria de ensinar            225/06/2019000000
+0000008The Art of Deception            122/06/2019000002
+0000009A Brief History of Time         118/06/2019000004
+0000010The Stars, Like Dust            330/06/2019000001
