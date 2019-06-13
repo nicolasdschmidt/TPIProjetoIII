@@ -126,44 +126,16 @@ namespace apBiblioteca
 					QuantosLivrosComLeitor++;
 					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;
 					livroAEmprestar.DataDevolucao = DateTime.Now.AddDays(7); // define a data de devolução como uma semana depois do empréstimo
-					MessageBox.Show($"{livroAEmprestar.TituloLivro.Trim()} foi emprestado a {NomeLeitor.Trim()}.", "Empréstimo realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+					MessageBox.Show($"{livroAEmprestar.TituloLivro.Trim()} foi emprestado a {NomeLeitor.Trim()}.{Environment.NewLine}A data de devolução é {FormatarData(livroAEmprestar.DataDevolucao)}", "Empréstimo realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 				else
 					MessageBox.Show($"O leitor ({CodigoLeitor}) {NomeLeitor.Trim()} já possui o número máximo de livros emprestados", "Máximo de livros alcançado", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			else
 			{
-				string diaSemana = livroAEmprestar.DataDevolucao.DayOfWeek.ToString();
-				switch (diaSemana)
-				{
-					case "Sunday":		diaSemana = "domingo";			break;
-					case "Monday":		diaSemana = "segunda-feira";	break;
-					case "Tuesday":		diaSemana = "terça-feira";		break;
-					case "Wednesday":	diaSemana = "quarta-feira";		break;
-					case "Thursday":	diaSemana = "quinta-feira";		break;
-					case "Friday":		diaSemana = "sexta-feira";		break;
-					case "Saturday":	diaSemana = "sábado";			break;
-				}
-				string dia = livroAEmprestar.DataDevolucao.Day.ToString();
-				string mes = livroAEmprestar.DataDevolucao.Month.ToString();
-				switch (mes)
-				{
-					case "1": mes  = "janeiro";		break;
-					case "2": mes  = "fevereiro";	break;
-					case "3": mes  = "março";		break;
-					case "4": mes  = "abril";		break;
-					case "5": mes  = "maio";		break;
-					case "6": mes  = "junho";		break;
-					case "7": mes  = "julho";		break;
-					case "8": mes  = "agosto";		break;
-					case "9": mes  = "setembro";	break;
-					case "10": mes = "outubro";		break;
-					case "11": mes = "novembro";	break;
-					case "12": mes = "dezembro";	break;
-				}
-				string ano = livroAEmprestar.DataDevolucao.Year.ToString();
+				// TODO: avisar se o leitor está tentando emprestar um livro que já está com ele
 				MessageBox.Show($"O livro selecionado já está emprestado.{Environment.NewLine}" +
-					$"A data de devolução prevista é {diaSemana}, {dia} de {mes} de {ano}.", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);			}
+					$"A data de devolução prevista é {FormatarData(livroAEmprestar.DataDevolucao)}.", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);			}
 		}
 
 		public void Devolver(Livro livroADevolver)
@@ -178,9 +150,46 @@ namespace apBiblioteca
 					}
 					QuantosLivrosComLeitor--;
 					livroADevolver.CodigoLeitorComLivro = "000000";
+					// TODO: verificar se o livro foi devolvido no prazo, senão, avisar o leitor sobre o atraso
+					// TODO: atualizar ComboBox, de modo que o livro devolvido não seja mais exibido
 					MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 			}
+		}
+
+		private string FormatarData(DateTime data)
+		{
+			string diaSemana = data.DayOfWeek.ToString();
+			switch (diaSemana)
+			{
+				case "Sunday": diaSemana = "domingo"; break;
+				case "Monday": diaSemana = "segunda-feira"; break;
+				case "Tuesday": diaSemana = "terça-feira"; break;
+				case "Wednesday": diaSemana = "quarta-feira"; break;
+				case "Thursday": diaSemana = "quinta-feira"; break;
+				case "Friday": diaSemana = "sexta-feira"; break;
+				case "Saturday": diaSemana = "sábado"; break;
+			}
+			string dia = data.Day.ToString();
+			string mes = data.Month.ToString();
+			switch (mes)
+			{
+				case "1": mes = "janeiro"; break;
+				case "2": mes = "fevereiro"; break;
+				case "3": mes = "março"; break;
+				case "4": mes = "abril"; break;
+				case "5": mes = "maio"; break;
+				case "6": mes = "junho"; break;
+				case "7": mes = "julho"; break;
+				case "8": mes = "agosto"; break;
+				case "9": mes = "setembro"; break;
+				case "10": mes = "outubro"; break;
+				case "11": mes = "novembro"; break;
+				case "12": mes = "dezembro"; break;
+			}
+			string ano = data.Year.ToString();
+
+			return $"{diaSemana}, {dia} de {mes} de {ano}";
 		}
 
 		public override String ToString()
