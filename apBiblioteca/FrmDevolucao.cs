@@ -67,6 +67,17 @@ namespace apBiblioteca
 			oLeitor.Devolver(oLivro);
 			osLeitores.GravarDados(FrmBiblioteca.arqLeitores);
 			osLivros.GravarDados(FrmBiblioteca.arqLivros);
+			cbLivro.Items.Clear();
+			cbLivro.SelectedText = "";
+			for (int i = 0; i < osLeitores[osLeitores.PosicaoAtual].QuantosLivrosComLeitor; i++)
+			{
+				string codLivro = osLeitores[osLeitores.PosicaoAtual].CodigoLivroComLeitor[i];
+				for (int j = 0; j < osLivros.Tamanho; j++)
+				{
+					if (osLivros[j].CodigoLivro == codLivro)
+						cbLivro.Items.Add(osLivros[j].TituloLivro.Trim());
+				}
+			}
 		}
 
 		private void cbLivro_SelectedIndexChanged(object sender, EventArgs e)

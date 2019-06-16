@@ -117,7 +117,7 @@ namespace apBiblioteca
 		}
 
 		public void Emprestar(Livro livroAEmprestar)
-		{ 
+		{
 			if (int.Parse(livroAEmprestar.CodigoLeitorComLivro) == 0)
 			{
 				if (QuantosLivrosComLeitor <= 5)
@@ -133,9 +133,16 @@ namespace apBiblioteca
 			}
 			else
 			{
-				// TODO: avisar se o leitor está tentando emprestar um livro que já está com ele
-				MessageBox.Show($"O livro selecionado já está emprestado.{Environment.NewLine}" +
-					$"A data de devolução prevista é {FormatarData(livroAEmprestar.DataDevolucao)}.", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);			}
+				if (livroAEmprestar.CodigoLeitorComLivro == codigoLeitor)
+				{
+					MessageBox.Show("O livro selecionado já está emprestado por você.");
+				}
+				else
+				{
+					MessageBox.Show($"O livro selecionado já está emprestado.{Environment.NewLine}" +
+						$"A data de devolução prevista é {FormatarData(livroAEmprestar.DataDevolucao)}.", "Livro emprestado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
 		}
 
 		public void Devolver(Livro livroADevolver)
@@ -150,9 +157,10 @@ namespace apBiblioteca
 					}
 					QuantosLivrosComLeitor--;
 					livroADevolver.CodigoLeitorComLivro = "000000";
-					// TODO: verificar se o livro foi devolvido no prazo, senão, avisar o leitor sobre o atraso
-					// TODO: atualizar ComboBox, de modo que o livro devolvido não seja mais exibido
-					MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+					if (livroADevolver.DataDevolucao < DateTime.Now)
+						MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!{Environment.NewLine}Porém, a devolução foi realizada com atraso. O prazo era {FormatarData(livroADevolver.DataDevolucao)}.", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+					else
+						MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
 			}
 		}
