@@ -29,33 +29,33 @@ namespace apBiblioteca
 				if (item is ToolStripButton) // se não é separador:
 					(item as ToolStripButton).ImageIndex = indice++;
 			osTipos.LerDados(FrmBiblioteca.arqTipos);
-			osTipos.PosicionarNoPrimeiro();
+			osTipos.PosicionarNoPrimeiro();                                     // posiciona no primeiro
 			AtualizarDataGridView();
-			if (FrmBiblioteca.consulta)
-				tabControl1.SelectedTab = tpLista;
+			if (FrmBiblioteca.consulta)                                         // verifica se não é uma consulta
+				tabControl1.SelectedTab = tpLista;                              // troca de aba
 		}
 
 		private void AtualizarDataGridView()
 		{
 			dgvTipos.Rows.Clear();
-			osTipos.Ordenar();
+			osTipos.Ordenar();                                                          // ordena o vetor de osTipos
 			for (int i = 0; i < osTipos.Tamanho; i++)
 			{
 				Tipo tipoAdicionar = osTipos[i];
-				dgvTipos.Rows.Insert(i, tipoAdicionar.CodigoTipo, tipoAdicionar.NomeTipo);
+				dgvTipos.Rows.Insert(i, tipoAdicionar.CodigoTipo, tipoAdicionar.NomeTipo);  // insere uma linha no data grid view
 			}
 			AtualizarTela();
 		}
 
 		private void AtualizarTela()
 		{
-			if (!osTipos.EstaVazio)
+			if (!osTipos.EstaVazio)                                                     // se osTipos não está vazio
 			{
-				Tipo tipo = osTipos[osTipos.PosicaoAtual];
-				txtCodigoTipo.Text = tipo.CodigoTipo.ToString();
-				txtDescricaoTipo.Text = tipo.NomeTipo.ToString();
-				dgvTipos.ClearSelection();
-				dgvTipos.Rows[osTipos.PosicaoAtual].Selected = true;
+				Tipo tipo = osTipos[osTipos.PosicaoAtual];                              // pega o objeto tipo da posição atual
+				txtCodigoTipo.Text = tipo.CodigoTipo.ToString();                        // escreve o codigoTipo no txtCodigoTipo  
+				txtDescricaoTipo.Text = tipo.NomeTipo.ToString();                       // escreve a descrição no txtDescricao
+                dgvTipos.ClearSelection();
+				dgvTipos.Rows[osTipos.PosicaoAtual].Selected = true;                    // seleciona no data grid view
 				dgvTipos.CurrentCell = dgvTipos.Rows[osTipos.PosicaoAtual].Cells[0];
 				dgvTipos.BeginEdit(true);
 				dgvTipos.EndEdit();
@@ -64,7 +64,7 @@ namespace apBiblioteca
 
 		private void LimparTela()
 		{
-			txtCodigoTipo.Clear();
+			txtCodigoTipo.Clear();                                      
 			txtDescricaoTipo.Clear();
 		}
 
@@ -95,33 +95,33 @@ namespace apBiblioteca
 		private void btnProcurar_Click(object sender, EventArgs e)
 		{
 			LimparTela();
-			osTipos.SituacaoAtual = Situacao.pesquisando;
+			osTipos.SituacaoAtual = Situacao.pesquisando;                   // altera o modo
 			txtCodigoTipo.Focus();
 			stlbMensagem.Text = "Digite o código do livro que busca";
 		}
 
 		private void btnNovo_Click(object sender, EventArgs e)
 		{
-			osTipos.SituacaoAtual = Situacao.incluindo;
+			osTipos.SituacaoAtual = Situacao.incluindo;                                     // altera o modo
 			LimparTela();
-			txtCodigoTipo.Enabled = true;
-			txtDescricaoTipo.Enabled = true;
-			txtCodigoTipo.Focus();
+			txtCodigoTipo.Enabled = true;                                                   // ativa o txtCodigoTipo
+			txtDescricaoTipo.Enabled = true;                                                // ativa o txtDescricaoTipo
+            txtCodigoTipo.Focus();
 			stlbMensagem.Text = "Digite os novos dados";
 
-			btnSalvar.Enabled = true;
+			btnSalvar.Enabled = true;                                                       // ativa o botão Salvar
 		}
 
 		private void btnEditar_Click(object sender, EventArgs e)
 		{
-			osTipos.SituacaoAtual = Situacao.editando;
-			txtCodigoTipo.Enabled = true;
-			txtDescricaoTipo.Enabled = true;
-			txtCodigoTipo.Focus();
+			osTipos.SituacaoAtual = Situacao.editando;                                              // altera o modo
+			txtCodigoTipo.Enabled = true;                                                           // ativa o txtCodigoTipo
+            txtDescricaoTipo.Enabled = true;                                                        // ativa o txtDescricaoTipo
+            txtCodigoTipo.Focus();
 			stlbMensagem.Text = "Digite os novos dados";
 
-			btnSalvar.Enabled = true;
-		}
+			btnSalvar.Enabled = true;                                                               // ativa o botão Salvar
+        }
 
 		private void btnCancelar_Click(object sender, EventArgs e)
 		{
@@ -130,18 +130,18 @@ namespace apBiblioteca
 
 		private void btnSalvar_Click(object sender, EventArgs e)
 		{
-			if (osTipos.SituacaoAtual == Situacao.incluindo) // está no modo de inclusão
+			if (osTipos.SituacaoAtual == Situacao.incluindo)                                    // está no modo de inclusão
 			{
 				var novoDado = new Tipo(byte.Parse(txtCodigoTipo.Text), Capitalize(txtDescricaoTipo.Text));
-				osTipos.Incluir(novoDado);
-				// para mudar o registro com o qual trabalhamos no momento
+				osTipos.Incluir(novoDado);                                                      // inclui no vetor
+				                                                                                // para mudar o registro com o qual trabalhamos no momento
 				AtualizarDataGridView();
-				osTipos.SituacaoAtual = Situacao.navegando; // termina o modo de inclusão
+				osTipos.SituacaoAtual = Situacao.navegando;                                     // termina o modo de inclusão
 			}
-			else  // verificar se está editando
+			else                                                                                // verificar se está editando
 			  if (osTipos.SituacaoAtual == Situacao.editando)
 			{
-				osTipos[osTipos.PosicaoAtual] = new Tipo(byte.Parse(txtCodigoTipo.Text), Capitalize(txtDescricaoTipo.Text));
+				osTipos[osTipos.PosicaoAtual] = new Tipo(byte.Parse(txtCodigoTipo.Text), Capitalize(txtDescricaoTipo.Text));    // altera o tipo da posição atual
 				osTipos.SituacaoAtual = Situacao.navegando;
 				txtCodigoTipo.Enabled = false;
 				AtualizarDataGridView();
@@ -155,28 +155,28 @@ namespace apBiblioteca
 				   $"Deseja realmente excluir o registro?{Environment.NewLine}" +
 				   $"{osTipos[osTipos.PosicaoAtual].CodigoTipo} - {osTipos[osTipos.PosicaoAtual].NomeTipo}", "Exclusão",
 				   MessageBoxButtons.YesNo,
-				   MessageBoxIcon.Warning) == DialogResult.Yes)
+				   MessageBoxIcon.Warning) == DialogResult.Yes)                                             // verifica se realmente quer excluir
 			{
 				osTipos.Excluir(osTipos.PosicaoAtual);
-				if (osTipos.PosicaoAtual >= osTipos.Tamanho)
-					osTipos.PosicionarNoUltimo();
-				AtualizarTela();
+				if (osTipos.PosicaoAtual >= osTipos.Tamanho)                                                // se for o ultimo
+					osTipos.PosicionarNoUltimo();                                                           // posiciona no anterior, o novo último
+                AtualizarTela();
 			}
 		}
 
 		private void btnSair_Click(object sender, EventArgs e)
 		{
-			Close();
+			Close();                                                        // fecha
 		}
 
 		public string Capitalize(string str)
 		{
-			str = str.Trim();
+			str = str.Trim();                                                   // recebe a string e divide 
 			if (str == null)
 				return null;
 
-			if (str.Length > 1)
-				return char.ToUpper(str[0]) + str.Substring(1);
+			if (str.Length > 1)                                                 // se não for só uma letra
+				return char.ToUpper(str[0]) + str.Substring(1);                 // coloca primeira letra Maiúscula e soma ao resto da string
 
 			return str.ToUpper();
 		}
@@ -192,37 +192,38 @@ namespace apBiblioteca
 		private void txtCodigoTipo_Leave(object sender, EventArgs e)
 		{
 			int ondeIncluir = -1;
-			if (txtCodigoTipo.Text == "")
+			if (txtCodigoTipo.Text == "")                                                       // se o código é inválido
 				MessageBox.Show("Digite um código válido!");
-			else
+			else                                                                                // se o código é válido
 			{
-				var procurado = new Tipo(byte.Parse(txtCodigoTipo.Text), "");
+				var procurado = new Tipo(byte.Parse(txtCodigoTipo.Text), "");                   // tipo procurado
 				switch (osTipos.SituacaoAtual)
 				{
-					case Situacao.incluindo:
-						if (osTipos.Existe(procurado, ref ondeIncluir))   // se já existe o código
+                    // escolhe de acordo com o modo
+					case Situacao.incluindo:                                        // INCLUINDO
+						if (osTipos.Existe(procurado, ref ondeIncluir))             // se já existe o código
 						{
 							MessageBox.Show("Código repetido; inclusão cancelada.");
 							osTipos.SituacaoAtual = Situacao.navegando;
-							AtualizarTela(); // restaura o registro visível anteriormente
+							AtualizarTela();                                        // restaura o registro visível anteriormente
 						}
-						else // o código ainda não existe no vetor dados
+						else                                                        // o código ainda não existe no vetor dados
 						{
 							txtDescricaoTipo.Focus();
 							stlbMensagem.Text = "Digite os demais dados. Após isso pressione [Salvar]";
 						}
 						break;
-					case Situacao.pesquisando:
+					case Situacao.pesquisando:                                      // PESQUISANDO
 						int ondeAchou = 0;
-						if (!osTipos.Existe(procurado, ref ondeAchou))
+						if (!osTipos.Existe(procurado, ref ondeAchou))              // se o código não existe
 						{
 							MessageBox.Show("Código não foi cadastrado ainda.");
 							AtualizarTela();
 							osTipos.SituacaoAtual = Situacao.navegando;
 						}
-						else  // encontrou o código procurado na posição ondeAchou
+						else                                                        // encontrou o código procurado na posição ondeAchou
 						{
-							osTipos.PosicaoAtual = ondeAchou;
+							osTipos.PosicaoAtual = ondeAchou;                       // a posição atual recebe onde achou
 							AtualizarTela();
 							osTipos.SituacaoAtual = Situacao.navegando;
 						}
@@ -233,7 +234,7 @@ namespace apBiblioteca
 
 		private void tpLista_Enter(object sender, EventArgs e)
 		{
-			osTipos.ExibirDados(lsbTipos, "Código Descrição");
+			osTipos.ExibirDados(lsbTipos, "Código Descrição");                                      // exibi os dados no listBox
 		}
 	}
 }
