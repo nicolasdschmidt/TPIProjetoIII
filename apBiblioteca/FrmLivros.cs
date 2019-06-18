@@ -12,10 +12,10 @@ namespace apBiblioteca
 {
 	public partial class FrmLivros : Form
 	{
-		VetorDados<Livro> osLivros; // osLivros armazenará os dados lidos e terá os métodos de manutenção
+		VetorDados<Livro> osLivros;                                                             // osLivros armazenará os dados lidos e terá os métodos de manutenção
 		VetorDados<Leitor> osLeitores;
 		VetorDados<Tipo> osTipos;
-		int ondeIncluir = 0; // global --> acessível na classe toda
+		int ondeIncluir = 0;                                                                    // global --> acessível na classe toda
 		public FrmLivros()
 		{
 			InitializeComponent();
@@ -26,30 +26,30 @@ namespace apBiblioteca
 			int indice = 0;
 			barraDeFerramentas.ImageList = imlBotoes;
 			foreach (ToolStripItem item in barraDeFerramentas.Items)
-				if (item is ToolStripButton) // se não é separador:
+				if (item is ToolStripButton)                                                    // se não é separador:
 					(item as ToolStripButton).ImageIndex = indice++;
 
-			osLivros = new VetorDados<Livro>(50); // instancia com vetor dados com 50 posições
-			osLeitores = new VetorDados<Leitor>(50); // instancia com vetor dados com 50 posições
-			osTipos = new VetorDados<Tipo>(50); // instancia com vetor dados com 50 posições
+			osLivros = new VetorDados<Livro>(50);                                               // instancia com vetor dados com 50 posições
+			osLeitores = new VetorDados<Leitor>(50);                                            // instancia com vetor dados com 50 posições
+			osTipos = new VetorDados<Tipo>(50);                                                 // instancia com vetor dados com 50 posições
 			osLivros.LerDados(FrmBiblioteca.arqLivros);
 			osLeitores.LerDados(FrmBiblioteca.arqLeitores);
 			osTipos.LerDados(FrmBiblioteca.arqTipos);
-			if (osLivros != null)
-				osLivros.PosicionarNoPrimeiro();
-			AtualizarDataGridView();
-			if (FrmBiblioteca.consulta)
-				tabControl1.SelectedTab = tpLista;
-		}
+			if (osLivros != null)                                                               // verifica se não está vazio
+                osLivros.PosicionarNoPrimeiro();                                                // posciona na primeira posição
+            AtualizarDataGridView();
+			if (FrmBiblioteca.consulta)                                                         // verifica se é uma consulta
+                tabControl1.SelectedTab = tpLista;                                              // coloca na aba de consulta
+        }
 
 		private void AtualizarDataGridView()
 		{
-			dgvTipoLivro.Rows.Clear();
-			osTipos.Ordenar();
-			for (int i = 0; i < osTipos.Tamanho; i++)
+			dgvTipoLivro.Rows.Clear();                                                          // limpa o data grid view
+			osTipos.Ordenar();                                                                  // ordena o vetor
+			for (int i = 0; i < osTipos.Tamanho; i++)                                           // percorre o vetor
 			{
-				Tipo tipoAdicionar = osTipos[i];
-				dgvTipoLivro.Rows.Insert(i, tipoAdicionar.CodigoTipo, tipoAdicionar.NomeTipo);
+				Tipo tipoAdicionar = osTipos[i];                                                // objeto da posição i do vetos osTipos
+				dgvTipoLivro.Rows.Insert(i, tipoAdicionar.CodigoTipo, tipoAdicionar.NomeTipo);  // insere uma linha com os dados
 			}
 			AtualizarTela();
 		}
@@ -77,71 +77,72 @@ namespace apBiblioteca
 
 		private void AtualizarTela()
 		{
-			if (!osLivros.EstaVazio)
-			{
-				int indice = osLivros.PosicaoAtual;
+			if (!osLivros.EstaVazio)                                                        // verifica se não está vazio
+            {
+				int indice = osLivros.PosicaoAtual;                                         // recebe a posição atual do vetor
 				txtCodigoLivro.Text = osLivros[indice].CodigoLivro + "";
 				txtTituloLivro.Text = osLivros[indice].TituloLivro;
 				dgvTipoLivro.ClearSelection();
 				osTipos.PosicaoAtual = osLivros[indice].TipoLivro - 1;
-				for (int i = 0; i < dgvTipoLivro.RowCount; i++)
+				for (int i = 0; i < dgvTipoLivro.RowCount; i++)                                     // percorre o data gried view
 				{
-					if (int.Parse(dgvTipoLivro.Rows[i].Cells[0].Value.ToString()) == osTipos[osTipos.PosicaoAtual].CodigoTipo)
+					if (int.Parse(dgvTipoLivro.Rows[i].Cells[0].Value.ToString()) == osTipos[osTipos.PosicaoAtual].CodigoTipo)      // verifica se o tipo do
+                                                                                                                                    // livro é igual ao tipo 
+                                                                                                                                    // da posição atual no
+                                                                                                                                    // data gried view
 					{
-						dgvTipoLivro.Rows[i].Selected = true;
+                        dgvTipoLivro.Rows[i].Selected = true;                                                                       // seleciona o tipo (coloca e azul)
 						dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[i].Cells[0];
 						dgvTipoLivro.BeginEdit(true);
 						dgvTipoLivro.EndEdit();
 					}
 				}
-				//dgvTipoLivro.Rows[osTipos.PosicaoAtual].Selected = true;
-				//dgvTipoLivro.CurrentCell = dgvTipoLivro.Rows[osTipos.PosicaoAtual].Cells[0];
-				//dgvTipoLivro.BeginEdit(true);
-				//dgvTipoLivro.EndEdit();
-
+                // zera os textbox do groupbox2
 				txtLeitorComLivro.Text = "000000";
 				txtDataDevolucao.Text = "";
 				txtNomeLeitor.Text = "";
-				if (osLivros[indice].CodigoLeitorComLivro != "000000") // livro emprestado?
+				if (osLivros[indice].CodigoLeitorComLivro != "000000")                              // livro emprestado?
 				{
 					int ondeLeitor = 0;
-					var leitorProc = new Leitor(osLivros[indice].CodigoLeitorComLivro);
-					if (osLeitores.Existe(leitorProc, ref ondeLeitor))
+					var leitorProc = new Leitor(osLivros[indice].CodigoLeitorComLivro);             // cria um leitor com o código "CodigoLeitorComLivro"
+					if (osLeitores.Existe(leitorProc, ref ondeLeitor))                              // verifica se esse leitor existe
 					{
-						txtLeitorComLivro.Text = osLivros[indice].CodigoLeitorComLivro;
+                        // mostra os dados do leitor nos textbox's do groupbox2
+                        txtLeitorComLivro.Text = osLivros[indice].CodigoLeitorComLivro;
 						txtNomeLeitor.Text = osLeitores[ondeLeitor].NomeLeitor;
 						txtDataDevolucao.Text = osLivros[indice].DataDevolucao.ToShortDateString();
 					}
 				}
 
-				TestarBotoes();
-				stlbMensagem.Text =
+				TestarBotoes();                                                                      // atualiza o estado dos botões
+                stlbMensagem.Text =
 				  "Registro " + (osLivros.PosicaoAtual + 1) +
 							 "/" + osLivros.Tamanho;
 			}
 		}
 		private void LimparTela()
 		{
-			txtCodigoLivro.Clear();
-			txtTituloLivro.Clear();
-			txtLeitorComLivro.Text = "000000";
-			txtDataDevolucao.Text = "";
-			txtNomeLeitor.Text = "";
+			txtCodigoLivro.Clear();                                    // limpa o codigo do leitor
+            txtTituloLivro.Clear();                                    // limpa o nome do leitor
+            txtLeitorComLivro.Text = "000000";                         // coloca um código de leitor neutro 
+			txtDataDevolucao.Text = "";                                // limpa data de devolução
+            txtNomeLeitor.Text = "";                                   // limpa o nome do leitor
 		}
 
 		private void TestarBotoes()
 		{
-			btnInicio.Enabled = true;
-			btnAnterior.Enabled = true;
+            // ativa os botões
+            btnInicio.Enabled = true;                                             
+            btnAnterior.Enabled = true;
 			btnProximo.Enabled = true;
 			btnUltimo.Enabled = true;
-			if (osLivros.EstaNoInicio)
-			{
+			if (osLivros.EstaNoInicio)                                            // para desativar os botões de retroceder e voltar ao inicio
+            {
 				btnInicio.Enabled = false;
 				btnAnterior.Enabled = false;
 			}
-			if (osLivros.EstaNoFim)
-			{
+			if (osLivros.EstaNoFim)                                               // para desativar os botões de avançar e ir ao final
+            {
 				btnProximo.Enabled = false;
 				btnUltimo.Enabled = false;
 			}
@@ -165,42 +166,43 @@ namespace apBiblioteca
 			btnSalvar.Enabled = true;
 		}
 
-		private void txtMatricula_Leave(object sender, EventArgs e)
-		{
+		private void txtMatricula_Leave(object sender, EventArgs e)                            // ao sair do campo "txtCodigoLeitor"
+        {
 			if (txtCodigoLivro.Text == "")
 				MessageBox.Show("Digite um código válido!");
 			else
 			{
 				var procurado = new Livro(txtCodigoLivro.Text);
-				switch (osLivros.SituacaoAtual)
-				{
-					case Situacao.incluindo:
-						if (osLivros.Existe(procurado, ref ondeIncluir))   // se já existe o código
+				switch (osLivros.SituacaoAtual)                                                 // escolhe a operação de acordo com o modo de navegação
+                {
+					case Situacao.incluindo:                                                    // INCLUINDO
+                        if (osLivros.Existe(procurado, ref ondeIncluir))                        // se já existe o código
 						{
 							MessageBox.Show("Código repetido; inclusão cancelada.");
-							osLivros.SituacaoAtual = Situacao.navegando;
-							AtualizarTela(); // restaura o registro visível anteriormente
+							osLivros.SituacaoAtual = Situacao.navegando;                        // cancela a inclusão e retorna a navegação
+                            AtualizarTela();                                                    // restaura o registro visível anteriormente
 						}
-						else // o código ainda não existe no vetor dados
+						else                                                                    // o código ainda não existe no vetor dados
 						{
 							txtTituloLivro.Focus();
 							stlbMensagem.Text = "Digite os demais dados. Após isso pressione [Salvar]";
 						}
 						break;
-					case Situacao.pesquisando:
-						int ondeAchou = 0;
-						if (!osLivros.Existe(procurado, ref ondeAchou))
-						{
+					case Situacao.pesquisando:                                                  // PESQUISANDO   
+                        int ondeAchou = 0;
+						if (!osLivros.Existe(procurado, ref ondeAchou))                         // se não achou o codigo procurado
+                        {
 							MessageBox.Show("Código não foi cadastrado ainda.");
+							AtualizarTela();                                                    // atualiza a tela e colocar na primeira posição
+                            osLivros.SituacaoAtual = Situacao.navegando;                        // volta para o modo de navegação
+                        }
+						else                                                                    // encontrou o código procurado na posição ondeAchou
+                        {
+                            // para mudar o registro com o qual trabalhamos no momento
+                            osLivros.PosicaoAtual = ondeAchou;
 							AtualizarTela();
-							osLivros.SituacaoAtual = Situacao.navegando;
-						}
-						else  // encontrou o código procurado na posição ondeAchou
-						{
-							osLivros.PosicaoAtual = ondeAchou;
-							AtualizarTela();
-							osLivros.SituacaoAtual = Situacao.navegando;
-						}
+							osLivros.SituacaoAtual = Situacao.navegando;                        // para mudar o registro com o qual trabalhamos no momento// volta para o modo de navegação
+                        }
 						break;
 				}
 			}
@@ -213,7 +215,7 @@ namespace apBiblioteca
 			if (qualTipo == -1)
 				MessageBox.Show("Selecione um tipo de livro antes de salvar o registro!");
 			else
-			  if (osLivros.SituacaoAtual == Situacao.incluindo) // está no modo de inclusão
+			  if (osLivros.SituacaoAtual == Situacao.incluindo)                                                 // está no modo de inclusão
 			{
 				var novoDado = new Livro(txtCodigoLivro.Text,
 									   txtTituloLivro.Text, qualTipo,
@@ -224,16 +226,17 @@ namespace apBiblioteca
 				osLivros.PosicaoAtual = ondeIncluir;
 				dgvTipoLivro.Enabled = false;
 				AtualizarTela();
-				osLivros.SituacaoAtual = Situacao.navegando; // termina o modo de inclusão
+				osLivros.SituacaoAtual = Situacao.navegando;                                                    // termina o modo de inclusão
 			}
-			else  // verificar se está editando
+			else                                                                                                // verificar se está editando
 				if (osLivros.SituacaoAtual == Situacao.editando)
 			{
 				osLivros[osLivros.PosicaoAtual] = new Livro(
-					  txtCodigoLivro.Text, txtTituloLivro.Text, qualTipo,
-					  osLivros[osLivros.PosicaoAtual].DataDevolucao,
-					  osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro);
-				osLivros.SituacaoAtual = Situacao.navegando;
+					  txtCodigoLivro.Text, txtTituloLivro.Text, qualTipo,                                       // únicos alterável
+                      osLivros[osLivros.PosicaoAtual].DataDevolucao,
+					  osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro);                                    // cria um novo leitor na posição do leitor antigo 
+                                                                                                                // com as propiedades novas
+                osLivros.SituacaoAtual = Situacao.navegando;
 				txtCodigoLivro.ReadOnly = false;
 				dgvTipoLivro.Enabled = false;
 				AtualizarTela();
@@ -249,22 +252,22 @@ namespace apBiblioteca
 
 		private void FrmFunc_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			osLivros.GravarDados(FrmBiblioteca.arqLivros);
-		}
+			osLivros.GravarDados(FrmBiblioteca.arqLivros);                                            // salva as alterações no arquivo texto
+        }
 
 		private void btnExcluir_Click(object sender, EventArgs e)
 		{
-			if (int.Parse(osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro) == 0)
-			{
+			if (int.Parse(osLivros[osLivros.PosicaoAtual].CodigoLeitorComLivro) == 0)                                   // verifica se o livro não está emprestado
+            {
 				if (MessageBox.Show(
 					   $"Deseja realmente excluir {osLivros[osLivros.PosicaoAtual].TituloLivro.Trim()} ({osLivros[osLivros.PosicaoAtual].CodigoLivro})?", "Exclusão",
 					   MessageBoxButtons.YesNo,
-					   MessageBoxIcon.Warning) == DialogResult.Yes)
-				{
+					   MessageBoxIcon.Warning) == DialogResult.Yes)                                                     // para garantir que a ação é consciente
+                {
 					osLivros.Excluir(osLivros.PosicaoAtual);
-					if (osLivros.PosicaoAtual >= osLivros.Tamanho)
-						osLivros.PosicionarNoUltimo();
-					AtualizarTela();
+					if (osLivros.PosicaoAtual >= osLivros.Tamanho)                                                      // verifica se é o último que foi excluido
+                        osLivros.PosicionarNoUltimo();                                                                  // posiciona no anterior, o novo último
+                    AtualizarTela();
 				}
 			}
 			else
@@ -273,34 +276,34 @@ namespace apBiblioteca
 
 		private void btnProcurar_Click(object sender, EventArgs e)
 		{
-			LimparTela();
-			osLivros.SituacaoAtual = Situacao.pesquisando;
-			txtCodigoLivro.Focus();
+			LimparTela();                                                                       // retira todas as informações da tela
+            osLivros.SituacaoAtual = Situacao.pesquisando;                                      // alterea o modo para indicar o processo ao sair do campo "txtCodigoLeito"
+            txtCodigoLivro.Focus();
 			stlbMensagem.Text = "Digite o código do livro que busca";
 		}
 
 		private void tpLista_Enter(object sender, EventArgs e)
 		{
-			osLivros.ExibirDados(lsbLivros, "Código  Título                        Tipo Devolução  Leitor com o livro");
-		}
+			osLivros.ExibirDados(lsbLivros, "Código  Título                        Tipo Devolução  Leitor com o livro");     // coloca um cabeçalho na consulta
+        }
 
 		private void btnEditar_Click(object sender, EventArgs e)
 		{
-			osLivros.SituacaoAtual = Situacao.editando;
-			txtCodigoLivro.ReadOnly = true;  // para não permitir alterar a matrícula
+			osLivros.SituacaoAtual = Situacao.editando;                                                 // para indicar o processo ao clicar em Salvar
+            txtCodigoLivro.ReadOnly = true;                                                             // para não permitir alterar a código do livro
 			dgvTipoLivro.Enabled = true;
 			stlbMensagem.Text = "Modifique os campos desejados e pressione [Salvar]";
 			txtTituloLivro.Focus();
 
-			btnSalvar.Enabled = true;
-		}
+			btnSalvar.Enabled = true;                                                                   // permite salvar as alterações
+        }
 
 		private void btnCancelar_Click(object sender, EventArgs e)
 		{
-			osLivros.SituacaoAtual = Situacao.navegando;
-			AtualizarTela();
-			btnSalvar.Enabled = false;
-		}
+			osLivros.SituacaoAtual = Situacao.navegando;                                    // volta para o modo de navegação
+            AtualizarTela();
+			btnSalvar.Enabled = false;                                                      // bloqueia o botão Salvar
+        }
 
 		private void dgvTipoLivro_CellClick(object sender, DataGridViewCellEventArgs e)
 		{

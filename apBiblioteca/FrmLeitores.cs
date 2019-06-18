@@ -113,7 +113,8 @@ namespace apBiblioteca
 
 		private void TestarBotoes()
 		{
-			btnInicio.Enabled = true;                                               // ativa os botões
+            // ativa os botões
+            btnInicio.Enabled = true;                                               
 			btnAnterior.Enabled = true;
 			btnProximo.Enabled = true;
 			btnUltimo.Enabled = true;
@@ -165,7 +166,7 @@ namespace apBiblioteca
 						}
 						else                                                                        // o código ainda não existe no vetor dados
 						{
-							txtNomeLeitor.Focus();                                                  // foca no campo "txtNomeLeitor"
+							txtNomeLeitor.Focus();                                                  
 							stlbMensagem.Text = "Digite os demais dados. Após isso pressione [Salvar]";
 						}
 						break;
@@ -247,7 +248,7 @@ namespace apBiblioteca
 				{
 					osLeitores.Excluir(osLeitores.PosicaoAtual);
 					if (osLeitores.PosicaoAtual >= osLeitores.Tamanho)                                  // verifica se é o último que foi excluido
-						osLeitores.PosicionarNoUltimo();                                                // posiciona no anterio, o novo último
+						osLeitores.PosicionarNoUltimo();                                                // posiciona no anterior, o novo último
 					AtualizarTela();
 				}
 			}
@@ -265,13 +266,13 @@ namespace apBiblioteca
 
 		private void tpLista_Enter(object sender, EventArgs e)
 		{
-			osLeitores.ExibirDados(lsbLivros, "Código Nome                                Endereço");
+			osLeitores.ExibirDados(lsbLivros, "Código Nome                                Endereço");   // coloca um cabeçalho na consulta
 		}
 
 		private void btnEditar_Click(object sender, EventArgs e)
 		{
 			osLeitores.SituacaoAtual = Situacao.editando;                                           // para indicar o processo ao clicar em Salvar
-			txtCodigoLeitor.ReadOnly = true;                                                        // para não permitir alterar a matrícula
+			txtCodigoLeitor.ReadOnly = true;                                                        // para não permitir alterar a código do leitor
 			stlbMensagem.Text = "Modifique os campos desejados e pressione [Salvar]";
 			txtNomeLeitor.Focus();
 
