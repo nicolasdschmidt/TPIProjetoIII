@@ -118,22 +118,22 @@ namespace apBiblioteca
 
 		public void Emprestar(Livro livroAEmprestar)
 		{
-			if (int.Parse(livroAEmprestar.CodigoLeitorComLivro) == 0)
+			if (int.Parse(livroAEmprestar.CodigoLeitorComLivro) == 0)                       // se o livro não está relacionado a algum leitor
 			{
-				if (QuantosLivrosComLeitor <= 5)
+				if (QuantosLivrosComLeitor <= 5)                                            // se já não está com 5 livros
 				{
-					CodigoLivroComLeitor[QuantosLivrosComLeitor] = livroAEmprestar.CodigoLivro;
-					QuantosLivrosComLeitor++;
-					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;
-					livroAEmprestar.DataDevolucao = DateTime.Now.AddDays(7); // define a data de devolução como uma semana depois do empréstimo
+					CodigoLivroComLeitor[QuantosLivrosComLeitor] = livroAEmprestar.CodigoLivro;     // leitor recebe o codigo do livro no vetor CodigoLivroComLEitor
+					QuantosLivrosComLeitor++;                                               // mais um livro com o leitor
+					livroAEmprestar.CodigoLeitorComLivro = CodigoLeitor;                    // o livro pega o código do leitor
+					livroAEmprestar.DataDevolucao = DateTime.Now.AddDays(7);                // define a data de devolução como uma semana depois do empréstimo
 					MessageBox.Show($"{livroAEmprestar.TituloLivro.Trim()} foi emprestado a {NomeLeitor.Trim()}.{Environment.NewLine}A data de devolução é {FormatarData(livroAEmprestar.DataDevolucao)}", "Empréstimo realizado com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 				}
-				else
+				else                                                                        // já está com 5 livros
 					MessageBox.Show($"O leitor ({CodigoLeitor}) {NomeLeitor.Trim()} já possui o número máximo de livros emprestados", "Máximo de livros alcançado", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-			else
+			else                                                                            // se o livro já foi emprestado
 			{
-				if (livroAEmprestar.CodigoLeitorComLivro == codigoLeitor)
+				if (livroAEmprestar.CodigoLeitorComLivro == codigoLeitor)                   
 				{
 					MessageBox.Show("O livro selecionado já está emprestado por você.");
 				}
@@ -147,17 +147,18 @@ namespace apBiblioteca
 
 		public void Devolver(Livro livroADevolver)
 		{
-			for (int i = 0; i < QuantosLivrosComLeitor; i++)
+			for (int i = 0; i < QuantosLivrosComLeitor; i++)                                        // percorre o vetor livros com leitor
 			{
-				if (CodigoLivroComLeitor[i] == livroADevolver.CodigoLivro)
+				if (CodigoLivroComLeitor[i] == livroADevolver.CodigoLivro)                          // se o livro da posição i é o livro a devolver
 				{
+                    // reposiona os livros no vetor, para não deixar um buraco
 					for (int j = i; j < QuantosLivrosComLeitor; j++)
 					{
 						CodigoLivroComLeitor[j] = CodigoLivroComLeitor[j + 1];
 					}
-					QuantosLivrosComLeitor--;
-					livroADevolver.CodigoLeitorComLivro = "000000";
-					if (livroADevolver.DataDevolucao < DateTime.Now)
+					QuantosLivrosComLeitor--;                                                       // retira um livro do vetor
+					livroADevolver.CodigoLeitorComLivro = "000000";                                 // coloca um código neutro no CodigoLivroComVetor
+					if (livroADevolver.DataDevolucao < DateTime.Now)                                // se o livro está atrasado
 						MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!{Environment.NewLine}Porém, a devolução foi realizada com atraso. O prazo era {FormatarData(livroADevolver.DataDevolucao)}.", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 					else
 						MessageBox.Show($"{livroADevolver.TituloLivro.Trim()} foi devolvido!", "Devolução realizada com sucesso", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -167,7 +168,8 @@ namespace apBiblioteca
 
 		private string FormatarData(DateTime data)
 		{
-			string diaSemana = data.DayOfWeek.ToString();
+			string diaSemana = data.DayOfWeek.ToString();               // pega o dia da semana
+            // traduz
 			switch (diaSemana)
 			{
 				case "Sunday": diaSemana = "domingo"; break;
@@ -178,8 +180,9 @@ namespace apBiblioteca
 				case "Friday": diaSemana = "sexta-feira"; break;
 				case "Saturday": diaSemana = "sábado"; break;
 			}
-			string dia = data.Day.ToString();
-			string mes = data.Month.ToString();
+			string dia = data.Day.ToString();                           // pega o dia
+			string mes = data.Month.ToString();                         // pega o mês
+            // transforma o mês de ordem para nome 
 			switch (mes)
 			{
 				case "1": mes = "janeiro"; break;
@@ -195,9 +198,9 @@ namespace apBiblioteca
 				case "11": mes = "novembro"; break;
 				case "12": mes = "dezembro"; break;
 			}
-			string ano = data.Year.ToString();
+			string ano = data.Year.ToString();                          // pega o ano
 
-			return $"{diaSemana}, {dia} de {mes} de {ano}";
+			return $"{diaSemana}, {dia} de {mes} de {ano}";             // retorna tudos oq pegou
 		}
 
 		public override String ToString()
