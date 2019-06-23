@@ -40,5 +40,5 @@ Erros e dificuldades encontradas:
 
 ## Conclusão
 - Aprendemos a trabalhar com diversos formúlarios que interagem entre si
-- Aprendemos a dar continuidade em códigos de outras pessoas, e a importância da sua preucupação em fazer um código comentado e legível
-- Concluimos que, embora ainda no inicio do curso, podemos fazer aplicações simples mas funcionais
+- Aprendemos a dar continuidade em códigos de outras pessoas, e a importância da sua preocupação em fazer um código comentado e legível
+- Concluímos que, embora ainda no inicio do curso, podemos fazer aplicações simples mas funcionais
