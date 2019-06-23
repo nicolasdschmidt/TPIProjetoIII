@@ -14,7 +14,7 @@
 - Modificar o formulário de cadastro de livros para usar um DataGridView para selecionar os Tipos;
 - Ao excluir registros, certificar-se de que não haja relacionamentos com outras classes;
 - Criar formulários para emprestar e devolver livros;
-- Implementar formulários para as as opções de consulta.
+- Implementar formulários para as opções de consulta.
 
 ## Desenvolvimento
 
@@ -39,6 +39,6 @@ Erros e dificuldades encontradas:
 - Dificuldade para gerenciar seleções no DataGridView
 
 ## Conclusão
-- Aprendemos a trabalhar com diversos formúlarios que interagem entre si
+- Aprendemos a trabalhar com diversos formulários que interagem entre si
 - Aprendemos a dar continuidade em códigos de outras pessoas, e a importância da sua preocupação em fazer um código comentado e legível
-- Concluímos que, embora ainda no inicio do curso, podemos fazer aplicações simples mas funcionais
+- Concluímos que, embora ainda no início do curso, podemos fazer aplicações simples, mas funcionais
